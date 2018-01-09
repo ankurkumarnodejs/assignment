@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<%- include('header') %>
+<body>
+	<h1 class="text-center"> Update Customer Detail</h1>
+	<div class="jumbotron">
+	<div class="container" id="formshow">
+	<form action="/update" method="POST">
+	<input type="hidden" name="id" value="<%= customer._id %>" >		
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" value="<%= customer.name %>">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="<%= customer.email %>">
+    </div>
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input type="text" class="form-control" id="address" placeholder="Enter address" name="address" value="<%= customer.address %>">
+    </div>
+     <div class="form-group">
+      <label for="state">State:</label>
+      <input type="text" class="form-control" id="state" placeholder="Enter state" name="state" value="<%= customer.state %>">
+    </div>
+     <div class="form-group">
+      <label for="district">district:</label>
+      <input type="text" class="form-control" id="district" placeholder="Enter district" name="district" value="<%= customer.district %>">
+    </div>
+     <div class="form-group">
+      <label for="taluka">taluka:</label>
+      <input type="text" class="form-control" id="taluka" placeholder="Enter taluka" name="taluka" value="<%= customer.taluka %>">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input type="number" class="form-control" id="phone" placeholder="Enter phone" name="phone" value="<%= customer.phone %>">
+    </div>
+    <div class="form-group">
+      <label for="number">Number:</label>
+      <input type="number" class="form-control" id="number" placeholder="Enter number" name="number" value="<%= customer.number %>">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+</div>
+
+</body>
+</html>

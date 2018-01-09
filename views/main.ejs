@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<%- include('header') %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var selectedObj = {state: "", district:"", taluka:""}	
+$(document).ready(function(){
+    $("#formshow").hide();
+    $("#state").change(function(){
+       var state = this.value;
+       selectedObj.state = state;
+       showForm();
+	if(state != ""){
+		var stateobj = "state="+state;
+		$.ajax({url: "/filters",type: "GET", data: stateobj, success: function(result){
+		if(result.length > 0){
+		$("#district").html(htmlBuild(result));
+		$("#taluka").html("");		
+		selectedObj.taluka = $("#taluka").val();
+		showForm();	
+		}else{
+		$("#district").html("");
+		selectedObj.district = $("#district").val();
+		$("#taluka").html("");	
+		selectedObj.taluka = $("#taluka").val();
+       	showForm();	
+		}
+		}
+		});		
+		}else{
+		$("#taluka").html("");
+		selectedObj.taluka = $("#taluka").val();
+		showForm();
+		}
+    });
+
+	$("#district").change(function(){
+	   var district = this.value;
+	   selectedObj.district = district;
+       showForm();
+	   if(district != ""){
+	   	var districtobj = "district="+district;
+		$.ajax({url: "/filterd", type: "GET", data: districtobj, success: function(result){
+		if(result.length > 0){
+		$("#taluka").html(htmlBuild(result));		
+		}else{
+		$("#taluka").html("");		
+		}
+		}});
+	   }else{
+	   	$("#taluka").html("");       	
+	   }
+	});
+	
+	$("#taluka").change(function(){
+		var taluka = this.value;
+		selectedObj.taluka = taluka;
+       	showForm();
+	});
+
+	});
+
+		function htmlBuild(data){
+				var str = "<option value=''>Select</option>";
+				for(var i=0; i<data.length; i++){
+				str += "<option value='" + data[i] + "'>" + data[i] + "</option>"
+				if(i == (data.length-1)){
+				return str;
+				}
+				}
+				}
+
+		function showForm(){
+		console.log(selectedObj);
+		if((selectedObj.state != "" && selectedObj.state != null) && (selectedObj.district != "" && selectedObj.district != null) && (selectedObj.taluka != "" && selectedObj.taluka != null)){
+			$("#formshow").show();
+
+			}else{
+			$("#formshow").hide();
+		}
+		}
+
+</script>
+<body>
+<h1 class="text-center"><%= title %></h1>
+<div class="jumbotron">
+<div class="container">
+	<form action="/addcustomer" method="POST">
+	<select id="state" name="state">
+		<option value=""> Select </option>
+		<% for(var i=0; i < states.length; i++) { %>
+		<option value="<%= states[i] %>"> <%= states[i] %> </option>
+		<% } %>
+	</select>
+	<select id="district" name="district">
+	</select>
+	<select id="taluka" name="taluka">
+	</select>
+	<span id="formshow">		
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+    </div>
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input type="text" class="form-control" id="address" placeholder="Enter address" name="address">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input type="number" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+    </div>
+    <div class="form-group">
+      <label for="number">Number:</label>
+      <input type="number" class="form-control" id="number" placeholder="Enter number" name="number">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+
+</span>
+  </form>
+
+</div>
+<hr>
+<div class="container">
+	<div class="table">
+		<table class="table">
+		<thead>
+		<tr>
+		<th scope="col">#</th>
+		<th scope="col">Name</th>
+		<th scope="col">Email</th>
+		<th scope="col">Address</th>
+		<th scope="col">Phone</th>
+		<th scope="col">Number</th>
+		<th scope="col">State</th>
+		<th scope="col">District</th>
+		<th scope="col">Taluka</th>
+		<th scope="col">#</th>
+		<th scope="col">#</th>
+		</tr>
+		</thead>
+		<tbody>
+		<% for(var i=0; i < customers.length; i++) { %>
+		<tr>
+		<td><%= i+1 %></td>
+		<td><%= customers[i].name %></td>
+		<td><%= customers[i].email %></td>
+		<td><%= customers[i].address %></td>
+		<td><%= customers[i].phone %></td>
+		<td><%= customers[i].number %></td>
+		<td><%= customers[i].state %></td>
+		<td><%= customers[i].district %></td>
+		<td><%= customers[i].taluka %></td>
+		<td><a href="/edit/<%= customers[i]._id %>">Edit</a></td>
+		<td><a href="/delete/<%= customers[i]._id %>">Delete</a></td>
+		</tr>
+		<% } %>		
+		</tbody>
+		</table>
+</div>
+</div>
+<h4 class="text-center"><a href="/"> Add New State </a></h4>
+</div>
+</body>
+</html>
