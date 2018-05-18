@@ -1,0 +1,138 @@
+<div class="row" *ngIf="customers.length > 0">
+  <span *ngFor="let profile of customers">
+    <div [ngClass]="dynamicclass.grid" *ngIf="profile._id != customerInfo._id && checkblock(profile._id)" >
+      <div class="panel card panel-default">
+        <div [ngClass]="dynamicclass.imageh">
+          <!-- [routerLink]="['/customer/public-profile', ]" -->
+          <a (click)="checkBlockedMe(profile._id)">
+            <img class="card-img-top img-fluid" [src]="checkImage(profile.profilePic)" alt="Card image cap" [ngClass]="dynamicclass.imagehh">
+          </a>
+        </div>
+        <div class="panel-body" [ngClass]="dynamicclass.padding">
+          <div class="card-body text-center">
+            <h5 class="card-title capitlize1 cardusername"><i *ngIf="myonline.indexOf(profile._id) != -1" class="fa fa-circle fa-online text-green"></i> <span>{{profile.username | ellipsis:10}} </span></h5>
+
+            <!-- Change p tag -->
+
+            <p class="card-text text-muted" *ngIf="!profile.age">N/a</p>
+            <p class="card-text text-muted cardlitleinfo" *ngIf="profile.age" style="margin-bottom: 0px; min-height: 39px;">{{profile.age}} <b *ngIf="profile.cityName">,</b> {{profile.cityName}} <b 
+              *ngIf="profile.countryName">,</b> {{profile.countryName}} </p>
+
+
+              <ul class="list-inline profile-icons  justify-content-around" style="display: inline-flex; font-size: 19px;">
+
+                <span *ngFor="let friend of friends" style="margin: auto;"> 
+
+                  <li class="list-inline-item" *ngIf="(profile._id == friend.FromId._id) && friend.status == 0" (click)="acceptrequest(friend._id, profile._id)"> 
+                    <a data-balloon="Accept" data-balloon-pos="down"  class="social-icon text-xs-center text-info pointer1"  >
+                      <i class="fa fa-check-circle text-grey1 faiconsize text-purple" aria-hidden="true"></i>
+                    </a>
+                  </li>
+
+
+                  <li  class="list-inline-item" *ngIf="(profile._id == friend.FromId._id)  && friend.status == 0" (click)="deleteBlock(friend._id)">                 
+                    <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Cancel" data-balloon-pos="down"> 
+                      <i class="fa fa-times-circle-o text-grey1 faiconsize text-red" aria-hidden="true"></i> 
+                    </a>
+                  </li>
+
+                  <li class="list-inline-item" *ngIf="(profile._id == friend.FromId._id || profile._id == friend.ToId._id) && friend.status == 1" (click)="deleteBlock(friend._id)">
+                    <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Unfriend" data-balloon-pos="down">
+                      <i class="fa fa-minus-circle text-grey1 faiconsize" aria-hidden="true"></i>
+                    </a>
+                  </li>
+
+                  <!--  <span *ngIf="(profile._id == friend.FromId._id || profile._id == friend.ToId._id) && friend.status == 1">Now Friend </span> -->
+
+                  <li class="list-inline-item" *ngIf="(this.customerInfo._id == friend.FromId._id && profile._id == friend.ToId._id) && friend.status == 0" >
+                    <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Sent Request" data-balloon-pos="down">
+                      <i class="fa fa-share-square text-info faiconsize text-purple" aria-hidden="true" ></i> 
+                    </a>
+                  </li>
+
+
+                  <li class="list-inline-item"  *ngIf="(this.customerInfo._id == friend.FromId._id && profile._id == friend.ToId._id) && friend.status == 0" (click)="deleteBlock(friend._id)">
+                    <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Cancel" data-balloon-pos="down">
+                      <i class="fa fa-times-circle-o text-grey1 faiconsize text-red" aria-hidden="true"></i>
+                    </a>
+                  </li>
+
+                  <li class="list-inline-item" *ngIf="(this.customerInfo._id == friend.FromId._id && profile._id == friend.ToId._id) && friend.status == 2" (click)="unblockrequest(friend, 2)"><a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Block" data-balloon-pos="down"><i class="fa fa-ban text-grey1 faiconsize text-red" aria-hidden="true"></i></a></li>  
+
+                  <li class="list-inline-item" *ngIf="(this.customerInfo._id == friend.FromId._id && profile._id == friend.ToId._id) && friend.status == 4" (click)="unblockrequest(friend, 4)"> <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Unblock" data-balloon-pos="down"><i class="fa fa-unlock-alt text-grey1 faiconsize" aria-hidden="true"></i></a></li>
+
+                </span> 
+
+                <li class="list-inline-item" *ngIf="checkforinvite(profile._id)" (click)="sendRequest(profile._id)">
+                  <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Add Friend" data-balloon-pos="down">
+                    <i class="fa fa-user-plus text-grey1 faiconsize text-purple" aria-hidden="true"></i>
+                  </a>
+                </li>
+
+                <li class="list-inline-item" *ngIf="checkforinvite(profile._id)" (click)="anyBlockRequest(profile._id)">
+                  <a class="social-icon text-xs-center text-danger" href="javascript:void(0)" data-balloon="Block" data-balloon-pos="down">
+                    <i class="fa fa-ban text-warning faiconsize text-red" aria-hidden="true"></i>
+                  </a>
+                </li>
+
+                <li class="list-inline-item" (click)="selectNewChat(profile._id);">
+                  <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Chat" data-balloon-pos="down">
+                    <i class="fa fa-envelope-o text-primary faiconsize" aria-hidden="true"></i>
+                  </a>
+                </li> 
+
+
+                <li class="list-inline-item" *ngIf="myonline.indexOf(profile._id) == -1"><a data-balloon="Not Online" data-balloon-pos="down" class="social-icon text-xs-center" href="javascript:void(0)"><i class="fa fa-video-camera" aria-hidden="true" style="color: lightgrey; font-size: 20px;"></i></a></li>
+
+
+                <li class="list-inline-item" *ngIf="myonline.indexOf(profile._id) != -1"><a data-balloon="Video Call" data-balloon-pos="down" class="social-icon text-xs-center" href="javascript:void(0)"><i class="fa fa-video-camera text-grey1 text-green faiconsize" (click)="vediocall(profile._id)"></i></a></li>  
+
+<!--                 
+<li class="list-inline-item">
+<a class="social-icon text-xs-center text-success pointer1"   data-balloon="Video Call" data-balloon-pos="down" data-toggle="modal" data-target="#videocalloutgoing" *ngIf="customerInfo.mypackage">
+<i *ngIf="(customerInfo.mypackage.remaincalls > 0) && (myonline.indexOf(profile._id) != -1)" class="fa fa-video-camera text-grey1 text-green faiconsize" (click)="vediocall(profile._id)"></i>
+<i class="fa fa-video-camera text-grey1 faiconsize" style="color: lightgrey;" *ngIf="(myonline.indexOf(profile._id) == -1)"></i>
+</a>                
+</li> 
+-->
+
+</ul>
+</div>
+</div>
+</div>
+</div>
+</span>  
+
+</div>
+
+<p style="font-size: 12px; text-align: center;" *ngIf="customers.length == 0">No Record Found!</p>
+
+<div class="modal fade" id="videocalloutgoing" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4>Outgoing video call to.. <button class="btn btn-danger new_process pull-right" (click)="videocallcancel()">Decline</button></h4>
+      </div>
+      <div class="modal-body text-center">          
+
+        <div class="new_process" *ngIf="callingto" >
+          <img  *ngIf="callingto.profilePic" src="{{url}}{{callingto.profilePic}}" style="width: 100px;
+          height: 100px;" />    
+          <img *ngIf="!callingto.profilePic"  src="/assets/images/face.png" style="width: 100px;
+          height: 100px;" /> 
+        </div>
+
+        <h4 *ngIf="callingto" class="text-center">{{callingto.username}}</h4>
+        <h5 class="myconnect new_process new_process1">
+          <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> &nbsp; <br> 
+          <p>Now You are making call ...</p>
+        </h5>
+
+      </div>
+    </div>
+
+  </div>
+</div>

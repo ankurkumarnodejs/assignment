@@ -1,0 +1,148 @@
+
+    <div id="wrapper" class="fill">
+<nav class="navbar navbar-default navbar-expand-xl navbar-fixed-top navbar-light">
+    <div class="navbar-header d-flex col">
+        <a class="navbar-brand navbartextcolor" [routerLink]="['/admin/dashboard']"><i class="fa fa-cube"></i>Speed<b>Dating</b></a>
+        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
+            <span class="navbar-toggler-icon"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+        <ul class="nav navbar-nav navbar-right ml-auto">
+            <li class="nav-item dropdown">
+                <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar" alt="Avatar"> <span class="navbartextcolor">{{currentUser.username}} <b class="caret"></b></span></a>
+                <ul class="dropdown-menu">
+                    <li><a  [routerLink]="['/admin/profile']" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
+                    <li><a [routerLink]="['/admin/changepassword/', currentUser._id ]" class="dropdown-item"><i class="fa fa-calendar-o"></i> ChangePassword</a></li>                   
+                    <li class="divider dropdown-divider"></li>
+                    <li><a [routerLink]="['/admin/login']"  class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+      <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                     
+                    <ul class="nav" id="side-menu">
+            <li class="active">
+                <a [routerLink]="['/admin/dashboard']"><i class="fa fa-fw fa-dashboard"></i> Dashboard </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/users']"> <i class="fa fa-fw fa-user"></i> Admin </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/customer/list']"><i class="fa fa-fw fa-users"></i> Users </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/package/list']"><i class="fa fa-calendar-o" aria-hidden="true"></i> Package</a>
+            </li>                      
+            <li>
+                <a [routerLink]="['/admin/banner/list']"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/bannersetting/list']"><i class="fa fa-cogs" aria-hidden="true"></i> Banner Setting </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/page/list']"><i class="fa fa-book" aria-hidden="true"></i> Pages </a>
+            </li>
+            <!-- <li>
+                <a [routerLink]="['/admin/country/list']"><i class="icon ion-ios-world" aria-hidden="true"></i> Country </a>
+            </li> -->  
+
+        </ul>                 
+                    
+                </div>
+                
+            </div>
+</nav>
+</div>
+
+  
+  
+
+
+
+
+<!-- 
+
+
+
+
+
+
+
+ <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: black; border-color: black;">
+   
+    <div class="container">
+        
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a [routerLink]="['/admin/dashboard']" class="navbar-brand">Speed Dating</a>
+    </div>
+
+
+    <ul class="nav navbar-right top-nav">
+        <li class="dropdown">       
+            <a data-toggle="dropdown" href="javascript:void(0)" class="dropdown-toggle" role="button" aria-haspopup="true"><i class="fa fa-user"></i> {{currentUser.username}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a [routerLink]="['/admin/profile']"><i class="fa fa-fw fa-user"></i> Profile</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a [routerLink]="['/admin/changepassword/', currentUser._id ]"><i class="fa fa-fw fa-user"></i> Change Password</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a [routerLink]="['/admin/login']"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                </li>                
+            </ul>
+        </li>
+    </ul>
+
+
+
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+            <li class="active">
+                <a [routerLink]="['/admin/dashboard']"><i class="fa fa-fw fa-dashboard"></i> Dashboard </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/users']"> <i class="fa fa-fw fa-user"></i> Admin </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/customer/list']"><i class="fa fa-fw fa-users"></i> Users </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/package/list']"><i class="fa fa-calendar-o" aria-hidden="true"></i> Package</a>
+            </li>                      
+            <li>
+                <a [routerLink]="['/admin/banner/list']"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/bannersetting/list']"><i class="fa fa-cogs" aria-hidden="true"></i> Banner Setting </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/page/list']"><i class="fa fa-book" aria-hidden="true"></i> Pages </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/country/list']"><i class="fa fa-flag" aria-hidden="true"></i> Country </a>
+            </li>  
+
+        </ul>
+    </div>
+    </div>
+
+
+
+</nav>
+ -->

@@ -1,0 +1,172 @@
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+ <div *ngIf="currentCustomer == ''" style="height: 60px;">
+                <a class="navbar-brand" [routerLink]="['/customer/profile']">
+                    <img alt="Brand" src="./assets/img/logo.png" height="40">
+                </a>
+        <form class="navbar-form navbar-right" role="search" [formGroup]="loginForm" (ngSubmit)="loginCustomer()">
+          <div class="form-group">
+            <input type="email" name="email" formControlName="email" placeholder="Username" class="form-control">
+          </div>
+          <div class="form-group"><input type="password" name="password" formControlName="password" placeholder="Enter Password" class="form-control"></div>
+          <button class="btn btn-danger" [disabled]="!loginForm.valid">Login</button>
+        </form>
+ </div>
+ <div  *ngIf="currentCustomer">
+            <div class="navbar-header" *ngIf="profile">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+                <a class="navbar-brand" [routerLink]="['/customer/profile']">
+                    <img alt="Brand" src="./assets/img/logo.png" height="40">
+                </a>
+                <a class=" visible-xs pull-right mobile-avatar-img" [routerLink]="['/customer/profile']"> 
+                  <img class="img-circle profileImgForChange" *ngIf="profile.profilePic" src="{{url}}{{profile.profilePic}}" height="50"/> 
+                  <img  class="img-circle" *ngIf="!profile.profilePic" src="../../../assets/images/face.png" height="50"/> 
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;"  *ngIf="profile">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="nav-link tool" data-balloon="Speed Dating" data-balloon-pos="down"  [routerLink]="['/customer/speeddating']">SD <span class=" visible-xs"> Speed Dating</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link tool" data-balloon="Browse Users" data-balloon-pos="down" [routerLink]="['/customer/profiles-list']" [queryParams]="{country: this.currentCustomer.countryName}">
+                          <i class="fa fa-user-circle-o"></i> 
+                          <span class="visible-xs"> Browse Users </span>
+                        </a>
+                    </li>
+                   <!--  <li>
+                        <a class="nav-link" href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Viewed"><i class="fa  fa-eye"></i> <span class=" visible-xs"> Viewed</span></a>
+                    </li>   -->                 
+                    <li class="visible-xs">
+                        <a class="nav-link"  [routerLink]="['/customer/profile']" [queryParams]="{type:'profile'}"><i class="fa fa-user"></i> <span class="visible-xs">Profile</span></a>
+                    </li>
+                    <li class="visible-xs">
+                        <a class="nav-link" [routerLink]="['/customer/profile']" [queryParams]="{type:'membership'}"><span href="#tab_b" data-toggle="pill"><i class="fa fa-user"></i> my membership</span></a>
+                    </li>                    
+                    <li class="visible-xs">
+                        <a class="nav-link" [routerLink]="['/']"><i class="fa fa-power-off" aria-hidden="true"></i> <span class="visible-xs">Logout</span></a>
+                    </li>
+                    <li class="hidden-xs">
+                        <div class="navbar-inset">
+                  <a class="pull-right mobile-avatar-img" [routerLink]="['/customer/profile']" style="width: inherit;
+                  height: inherit;"> 
+                  <img class="img-circle profileImgForChange" *ngIf="profile.profilePic" src="{{url}}{{profile.profilePic}}" height="50"/> 
+                  <img  class="img-circle" *ngIf="!profile.profilePic" src="../../../assets/images/face.png" height="50"/> 
+                </a>          
+                        </div>
+                    </li>
+                    <li class="dropdown hidden-xs">
+                        <a class="dropdown-toggle pointer1 capitlize1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{profile.username | ellipsis:10}} <i class="fa fa-bars fa-menu"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a [routerLink]="['/customer/profile']" [queryParams]="{type:'profile'}">Profile</a></li>
+                            <li><a [routerLink]="['/customer/profile']" [queryParams]="{type:'membership'}">Membership</a></li> 
+                            <li><a [routerLink]="['/customer/profile']" [queryParams]="{type:'friends'}">Friends</a></li>
+                            <li><a [routerLink]="['/customer/profile']" [queryParams]="{type:'message'}">Messages</a></li>
+                            <li><a [routerLink]="['/customer/profile']" [queryParams]="{type:'visitor'}">Visitors</a></li>
+                            <li><a [routerLink]="['/customer/profile']" [queryParams]="{type:'notification'}">Notifications</a></li>
+                            <!-- <li><a href="javascript:void(0)">Setting</a></li> -->
+                            <li role="separator" class="divider"></li>
+                            <li><a [routerLink]="['/']">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right" *ngIf="currentCustomer">
+        <li class="dropdown">
+          <a class="dropdown-toggle pointer1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-balloon="Notification" data-balloon-pos="down"  (click)="readNotifications()">
+            <i class="icon ion-ios-bell-outline" style="font-size: 23px;"></i> 
+
+            <span class="badge badge-notify noti6" *ngIf="notificationsdata.unreadlength != ''"> {{notificationsdata.unreadlength}}</span></a>
+
+          <ul class="dropdown-menu notify-drop noti1">
+            <div class="notify-drop-title">
+              <h5 class="text-center"> <a>Notifications</a></h5>
+            </div> 
+            <div  class="noti7 notifinalscroll" *ngIf="notificationsdata.unread.length > 0">           
+            <div class="drop-content noti4" *ngFor="let notifications of notificationsdata.unread">
+
+             <a [routerLink]="['/customer/profile']" [queryParams]="{type:'notification'}">             
+              <div class="media">
+                <div class="media-left">
+                  <span class="pointer1">
+                    <img *ngIf="notifications.FromId.profilePic" src="{{url}}{{notifications.FromId.profilePic}}" class="media-object img-circle noti3">
+                    <img *ngIf="!notifications.FromId.profilePic" src="/assets/images/face.png" class="media-object img-circle noti3">
+                  </span>
+                </div>
+                <div class="media-body">
+                  <span>
+                  <h5 class="media-heading">{{notifications.FromId.username}}<small><i>{{notifications.created_at | date:'medium'}}</i></small></h5>
+                  <p class="noti2" *ngIf="notifications.title == 'view'" >Viewed Your Profile.</p>
+                  <p class="noti2" *ngIf="notifications.title == 'request'" >Send request to you.</p>
+                  <p class="noti2" *ngIf="notifications.title == 'accept'" >Accepted Your request.</p>
+                  </span>
+                </div>
+              </div>
+              </a>             
+            </div>
+          </div>
+            <div class="notify-drop-footer text-center">
+              <a [routerLink]="['/customer/profile']" [queryParams]="{type:'notification'}"><i class="icon ion-android-list"></i> &nbsp;&nbsp; See All </a>
+            </div>
+          </ul>
+
+        </li>
+      </ul>
+
+
+
+      <ul class="nav navbar-nav navbar-right" *ngIf="currentCustomer">
+        <li class="dropdown">
+          <a class="dropdown-toggle pointer1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-balloon="Messages" data-balloon-pos="down"  (click)="readNotifications()" >
+            <i class="icon ion-email" style="font-size: 23px;"></i> 
+
+            <span class="badge badge-notify noti6" *ngIf="unreadMessagesCount > 0"> {{unreadMessagesCount}}</span></a>
+
+          <ul class="dropdown-menu notify-drop noti1">
+            <div class="notify-drop-title">
+              <h5 class="text-center"><a>Messages</a></h5>
+            </div> 
+            <div  class="noti7 notifinalscroll" *ngIf="unreadMessages.length > 0"> 
+
+
+            <div class="profile-activity clearfix" *ngFor="let message of unreadMessages">
+                                                    <span *ngIf="message">
+                                                    <a class="pointer1" (click)="selectChat(message.id._id)">
+                                                    <div>
+                                                        <img class="pull-left" alt="Profile image" [src]="profilePic(message.id.profilePic)" style="    width: 50px;height: 50px;max-width: 50px !important;">
+                                                        <a class="user pointer1"  href="javascript:void(0);" (click)="selectChat(message.id._id)" > {{message.id.username | ellipsis:10}} </a>
+                                                        <div class="time lastmessage"> {{message.messages[message.messages.length -1].message}} </div>
+                                                        <div class="time">
+                                                            <i class="ace-icon fa fa-clock-o bigger-110"></i> <span >{{message.messages[message.messages.length -1].created_at | date:'medium'}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tools action-buttons">
+                                                        <a class="blue pointer1">
+                                                            <i class="ace-icon ion-chatbox-working bigger-125 bigger1"></i>
+                                                        </a>
+                                                    </div>
+                                                  </a>
+                                                  </span>
+                                                </div>
+
+          </div>
+            <div class="notify-drop-footer text-center">
+              <a [routerLink]="['/customer/profile']" [queryParams]="{type:'message'}"><i class="icon ion-android-list"></i> &nbsp;&nbsp; See All </a>
+            </div>
+          </ul>
+
+        </li>
+      </ul>
+            </div>
+            </div>
+
+        </div>
+    </nav>
+

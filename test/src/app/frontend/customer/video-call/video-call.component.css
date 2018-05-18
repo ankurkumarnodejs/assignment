@@ -1,0 +1,38 @@
+.paddingl0{
+	padding-left: 0px;
+}
+.paddinglr0{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.chat-textad{
+	word-wrap: break-word;
+	width: 315px;
+}
+.relativeclass1{
+	position: relative;
+	height: calc(100vh - 69px);
+	width: 100%;
+}
+.relativeclass2{
+	position: absolute;
+	bottom: 0;
+}
+
+.tips-msg{
+	background: #d53369; /* fallback for old browsers */ background: -webkit-linear-gradient(to left, #cbad6d, #d53369); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to left, #cbad6d, #d53369); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.relativeclass3{
+	position: absolute;
+	right: 0;
+	top: 5px;
+}
+.minimizes {
+	display: none !important;
+}
+
+
+/*#subscriberContainer .OT_subscriber {
+	height: 100% !important;
+	width: 100% !important;
+}*/

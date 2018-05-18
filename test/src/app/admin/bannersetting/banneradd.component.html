@@ -1,0 +1,40 @@
+
+<div id="wrapper">
+    <app-header></app-header>
+    <div id="page-wrapper">    
+        <div class="container-fluid">               
+            <div class="row newmargin11" >
+                <div class="col-sm-12 paddingbredcumb">                       
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-cogs fa-fw"></i> &nbsp; Banner / Timing Add
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row newrow1 paddingform1">
+                <h4 class="text-center"><i class="icon ion-videocamera"></i> Times</h4>
+                <br>
+                <div> 
+                      <div class="form-group" *ngFor="let item of settiming; let i = index;">
+                            <label for="exampleInputEmail1">Frequency {{i+1}}</label>
+                            <span >
+                            <input  [(ngModel)]="item.time" type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter seconds" required>
+                           <!--  <span class="glyphicon glyphicon-remove-circle" (click)="removemorefield(i)"></span> -->
+                            </span>
+                                                     
+                        </div>
+                <br>
+                <div class="text-center">   
+                <button class="btn btn-sm btn-success" (click)="addmorefield()"><i class="icon ion-plus-round"></i></button>
+                </div>
+                     <form [formGroup]="userAddModel" (ngSubmit)="userAdd()">
+                        <a class="btn btn-danger pull-right" style="margin-left:5px;" [routerLink]="['/admin/bannersetting/list']"> Cancel</a>
+                        <button type="submit" class="btn btn-success pull-right btnmargin1" [disabled]="!userAddModel.valid">Submit</button>
+                    </form>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

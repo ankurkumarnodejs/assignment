@@ -1,0 +1,141 @@
+<div id="wrapper">
+  	<app-header></app-header>
+  	<div id="page-wrapper">
+    
+    		<div class="container-fluid">
+               
+    			<div class="row newmargin11" >
+                    <div class="col-sm-12 paddingbredcumb">                       
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> &nbsp; Admin / Dashboard
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="row newrow1">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                    <i class="fa fa-fw fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{users.length}}</div>
+                                        <div>Admin</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a [routerLink]="['/admin/users']">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-users fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{customers.length}}</div>
+                                        <div> Users</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a [routerLink]="['/admin/customer/list']">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">  
+                                   <i class="fa fa-calendar-o fa-5x" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{packages.length}}</div>
+                                        <div> Packages</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a [routerLink]="['/admin/package/list']">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                  
+
+                  <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">                                        
+                                        <i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{banners.length}}</div>
+                                        <div> Banners</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a [routerLink]="['/admin/banner/list']">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                  <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-book fa-5x" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{pages.length}}</div>
+                                        <div> Pages</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a [routerLink]="['/admin/page/list']">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+    		</div>
+	
+  	</div>
+</div>
+

@@ -1,0 +1,33 @@
+.bigger1{
+	font-size: 25px;
+}
+.lastmessage{
+	font-size: 10px;
+}
+.imagesize1{
+	width: 150px;
+    height: 150px;
+}
+.nav-tabs>li>a{
+	border: 0px;
+}
+.progress-bar-height{
+	height: 15px;
+}
+
+.changeListStyle{
+	background: lightblue;
+}
+
+.profile-usermenu ul li{
+	padding: 1rem;
+	cursor: pointer;
+}
+
+.profile-usermenu ul li:focus {
+    outline: none !important;
+}
+
+.profile-usermenu ul li:hover {
+	background: #e1f1fd;
+}

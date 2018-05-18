@@ -1,0 +1,1074 @@
+
+<div class="container profile-listing-container">
+    <!-- <button type="button" (click)="ji()">ddd</button> -->
+    <div class="row"  *ngIf="profile">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="profile-sidebar profile-sidebar1">                   
+                <div class="profile-userpic">
+                    <div class="uploadimage1">
+                        <div class="image-upload">
+                            <label for="file-input" class="imagecontainer" *ngIf="profile">
+                                <img  *ngIf="profile.profilePic" src="{{url}}{{profile.profilePic}}" class="uploadimage2 uploadimage3" /> 
+                                <img *ngIf="!profile.profilePic" src="../../../assets/images/face.png" class="uploadimage2 uploadimage3" /> 
+                                <div class="middleimage">
+                                    <div class="textnew"><i class="icon ion-camera"></i></div>
+                                </div>
+                            </label>
+                            <input type="file" (click)="uploader.clearQueue()" id="file-input" class="form-control" ng2FileSelect [uploader]="uploader" (change)="onChangeProfile($event)">
+                        </div>
+                    </div>
+                </div>                    
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        {{profile.username}}
+                    </div>
+                    <div class="profile-usertitle-job">
+                        {{profile.profession}}
+                    </div>
+                </div>                   
+                <div class="profile-userbuttons" *ngIf="profile">
+                    <button *ngIf="!profile.isprivate" class="btn btn-success btn-sm" (click)="makeprivate('true')">Block Me</button>
+                    <button *ngIf="profile.isprivate" class="btn btn-success btn-sm" (click)="makeprivate('false')">Unblock Me</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="preview()">Preview</button>
+                </div>
+                <div class="profile-usermenu">
+                    <ul class="">
+                        <li [ngClass]="paramtype == 'profile' ? 'changeListStyle' : ''" [routerLink]="['/customer/profile']" [queryParams]="{type:'profile'}">Profile</li>
+                        <li [ngClass]="paramtype == 'membership' ? 'changeListStyle' : ''" [routerLink]="['/customer/profile']" [queryParams]="{type:'membership'}">Membership</li> 
+                        <li [ngClass]="paramtype == 'friends' ? 'changeListStyle' : ''" [routerLink]="['/customer/profile']" [queryParams]="{type:'friends'}">Friends</li>
+                        <li [ngClass]="paramtype == 'message' ? 'changeListStyle' : ''" [routerLink]="['/customer/profile']" [queryParams]="{type:'message'}">Messages</li>
+                        <li [ngClass]="paramtype == 'visitor' ? 'changeListStyle' : ''" [routerLink]="['/customer/profile']" [queryParams]="{type:'visitor'}">Visitors</li>
+                        <li [ngClass]="paramtype == 'notification' ? 'changeListStyle' : ''" [routerLink]="['/customer/profile']" [queryParams]="{type:'notification'}">Notifications</li>
+
+                        <!-- <li style="visibility: hidden;" class="active"><a class="profile" href="#tab_a" data-toggle="pill" ></a></li>
+                        <li style="visibility: hidden;"><a class="mymembership" href="#tab_b" data-toggle="pill">Membership</a></li>
+                        <li style="visibility: hidden;"><a class="myfriends" href="#tab_c" data-toggle="pill" (click)="myFriends()">Friends</a></li>
+                        <li style="visibility: hidden;"><a class="mymessage" href="#tab_d" data-toggle="pill" (click)="myMessage()">Messages</a></li>
+                        <li style="visibility: hidden;"><a class="myviewed" href="#tab_e" data-toggle="pill" (click)="myViewed()">Visitor</a></li>
+                        <li style="visibility: hidden;"><a class="notifications" href="#tab_f" data-toggle="pill" (click)="getnotifications()">Notifications</a></li> -->
+
+                        <!-- <span *ngIf="loadDefaults()"></span> -->
+                    </ul>
+                </div>                 
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class="tab-content col-lg-12 profile-contect1">
+                <!-- Profile -->
+                <div class="active" id="tab_a" *ngIf = "paramtype == 'profile'">
+                    <div id="user-profile-2" class="user-profile">
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs padding-18">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#profile">
+                                        <i class="green ace-icon fa fa-user bigger-120"></i> Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#otherinfo">
+                                        <i class="green ace-icon fa fa-user bigger-120"></i> Other Info
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a data-toggle="tab" href="#photos">
+                                        <i class="pink ace-icon fa fa-picture-o bigger-120"></i> Photos
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a data-toggle="tab" href="#videos">
+                                        <i class="pink ace-icon fa fa-picture-o bigger-120"></i> Video
+                                    </a>
+                                </li> 
+
+                                <li>
+                                    <a data-toggle="tab" href="#youtube">
+                                        <i class="pink ace-icon fa fa-picture-o bigger-120"></i> Video link
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a data-toggle="tab" href="#changepassword">
+                                        <i class="green ace-icon fa fa-user bigger-120"></i> Change Password
+                                    </a>
+                                </li> 
+
+                                <li>
+                                    <a data-toggle="tab" href="#prefereces">
+                                        <i class="green ace-icon fa fa-user bigger-120"></i> Preference
+                                    </a>
+                                </li> 
+                            </ul>
+
+                            <div class="tab-content no-border padding-24">
+
+                                <div id="profile" class="tab-pane in active">
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-sm-9">
+
+                                            <div class="profile-user-info">
+                                                <form [formGroup]="profileUpdateModel"(ngSubmit)="profileUpdate()">
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Name </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <input formControlName="name" type="text" class="form-control" placeholder="Your Name" required>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Username </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <input formControlName="username" type="text" class="form-control" placeholder="Username" required [readonly]="true">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Email </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <input formControlName="email" type="text" class="form-control" id="email" placeholder="Email Id" required>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> City </div>
+                                                        <div class="profile-info-value">                       
+                                                            <span>
+                                                                <input  type="text"  id="pac-input" placeholder="Your City" class="form-control" formControlName="cityName"
+                                                                autocomplete="false">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Date Of Birth </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+
+                                                                <input formControlName="dateofbirth" type="text" class="form-control" id="dateofbirth" placeholder="Date of Birth"  #myTimeSets  (blur)="getTimeData(myTimeSets)" />
+                                                                <p style="color: red;" *ngIf="profileUpdateModel.get('age').errors"> Age Should Be minimum 18 Years.</p>
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Gender </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" formControlName="gender" name="gender" value="male"> Male
+                                                                        <input type="radio" formControlName="gender" name="gender" value="female"> Female
+                                                                    </li>
+                                                                </ul>  
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Interest </div>
+                                                        <div class="profile-info-value">
+                                                            <div class="panel-body">
+                                                                <input type="checkbox" name="sports" [checked]="this.objectForCustomerDetail.interest.indexOf('sports') != -1" (click)="interestupdates('sports')"/> &nbsp; Sports &nbsp; &nbsp;
+                                                                <input type="checkbox" name="shopping" [checked]="this.objectForCustomerDetail.interest.indexOf('shopping') != -1" (click)="interestupdates('shopping')"/> &nbsp; Shopping &nbsp; &nbsp;
+                                                                <input type="checkbox" name="books" [checked]="this.objectForCustomerDetail.interest.indexOf('books') != -1" (click)="interestupdates('books')"/> &nbsp; Book &nbsp; &nbsp;
+                                                                <input type="checkbox" name="movies" [checked]="this.objectForCustomerDetail.interest.indexOf('movies') != -1" (click)="interestupdates('movies')"/> &nbsp; Movies &nbsp; &nbsp;
+                                                                <input type="checkbox" name="others" [checked]="this.objectForCustomerDetail.interest.indexOf('others') != -1" (click)="interestupdates('others')"/> &nbsp; Others &nbsp; &nbsp;
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Sex Orientation </div>
+                                                        <div class="profile-info-value">
+                                                            <select class="form-control" id="sexualorient" formControlName="sexualorient"  placeholder="Sexualorient">         
+                                                                <option [ngValue]="'straight'">Straight</option>
+                                                                <option [ngValue]="'lesbian'">Lesbian</option>
+                                                                <option [ngValue]="'gay'">Gay</option>
+                                                                <option [ngValue]="'other'">other</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Description </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <textarea rows="5" cols="60" formControlName="description" class="form-control" placeholder="Description .."></textarea>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">  </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <button  class="btn btn-success btn-sm" [disabled]="!profileUpdateModel.valid">Update</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+
+                                            <div class="hr hr-8 dotted"></div>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <div class="space-20"></div>
+                                </div>
+                                <!-- /#home -->
+
+
+                                <!-- #otherInfo -->
+                                <div id="otherinfo" class="tab-pane">
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-sm-9">
+
+                                            <div class="profile-user-info">
+                                                <form [formGroup]="otherinfoUpdateModel" (ngSubmit)="otherinfoUpdate()">
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Height </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <select  class="form-control" formControlName="height">
+                                                                    <option *ngFor="let centimeter of questions[7].option" [ngValue]="centimeter"> {{centimeter}} cm</option>
+                                                                </select> 
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Hair Color </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <select  class="form-control" formControlName="haircolor"> 
+
+                                                                    <option *ngFor="let color of questions[1].option" value="{{color}}">{{color}}</option>
+                                                                </select> 
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Body Type </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <select  class="form-control" formControlName="bodyshape">   
+                                                                    <option *ngFor="let size of questions[2].option" value="{{size}}">{{size}}</option>
+                                                                </select> 
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Marital Status </div>
+                                                        <div class="profile-info-value"> 
+                                                            <select  class="form-control" formControlName="maritalStatus">  
+                                                                <option value="false">Single</option><option value="true">Married</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Children</div>
+                                                        <div class="profile-info-value"> 
+                                                            <select  class="form-control" formControlName="haveChildren">
+                                                                <option value="false">No</option><option value="true">Yes</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Smoke </div>
+                                                        <div class="profile-info-value">                                   
+                                                            <span>
+                                                                <select  class="form-control" formControlName="smoke">  
+                                                                    <option value="occasionally">Occasionally</option>
+                                                                    <option value="never">Never</option>
+                                                                    <option value="rarely">Rarely</option>
+                                                                    <option value="regularly">Regularly</option>
+                                                                </select> 
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Drink </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <select  class="form-control" formControlName="drink">   
+                                                                    <option value="occasionally">Occasionally</option>
+                                                                    <option value="never">Never</option>
+                                                                    <option value="rarely">Rarely</option>
+                                                                    <option value="regularly">Regularly</option>
+                                                                </select>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Profession </div>
+                                                        <div class="profile-info-value">
+                                                            <select  class="form-control" formControlName="profession">
+                                                                <option *ngFor="let s of questions[6].option" value="{{s}}">{{s}}</option>
+                                                            </select> 
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">  </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <button  class="btn btn-success btn-sm" [disabled]="!otherinfoUpdateModel.valid">Update</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+
+                                            <div class="hr hr-8 dotted"></div>
+
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <div class="space-20"></div>
+                                </div>
+                                    <!-- /#Other Info -->
+
+                                    <!-- #Prefereces -->
+                                <div id="prefereces" class="tab-pane">
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-sm-9">
+
+                                            <div class="profile-user-info">
+                                                <form [formGroup]="preferecesUpdateModel" (ngSubmit)="preferecesUpdate()">
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Min Height </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span>                                                            
+                                                                <select  class="form-control"  formControlName="minheight">     
+                                                                    <option *ngFor="let centimeter of questions[7].option" [ngValue]="centimeter">{{centimeter}} cm
+                                                                    </option>
+                                                                </select> 
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">  Max Height </div>
+                                                        <div class="profile-info-value">
+                                                            <select  class="form-control"  formControlName="maxheight">            
+
+                                                                <option *ngFor="let centimeter of questions[7].option" [ngValue]="centimeter">{{centimeter}} cm</option>
+                                                            </select> 
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Interested In </div>
+                                                        <div class="profile-info-value">
+                                                            <select  class="form-control"  formControlName="interestedin">            
+                                                                <option [ngValue]=''></option>       
+                                                                <option value="male">Male</option>
+                                                                <option value="female">Female</option>
+                                                                <option value="other">Other</option>
+                                                            </select> 
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">Sex Orientation </div>
+                                                        <div class="profile-info-value">
+
+                                                            <select class="form-control" id="sexualorient1" formControlName="sexualorient"  placeholder="Sexualorient">  
+                                                                <option [ngValue]=''></option>              
+                                                                <option [ngValue]="'straight'">Straight</option>
+                                                                <option [ngValue]="'lesbian'">Lesbian</option>
+                                                                <option [ngValue]="'gay'">Gay</option>
+                                                                <option [ngValue]="'other'">other</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Hair Color </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <select  class="form-control" formControlName="haircolor"> 
+                                                                    <option [ngValue]=''></option>       
+                                                                    <option *ngFor="let color of questions[1].option" value="{{color}}">{{color}}</option>
+                                                                </select> 
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Body Type </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <select  class="form-control" formControlName="bodyshape">   
+                                                                    <option *ngFor="let size of questions[2].option" value="{{size}}">{{size}}</option>
+                                                                </select> 
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Marital Status </div>
+                                                        <div class="profile-info-value"> 
+                                                            <select  class="form-control" formControlName="maritalStatus"> 
+                                                                <option [ngValue]=''></option>        
+                                                                <option value="false">Single</option><option value="true">Married</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Children</div>
+                                                        <div class="profile-info-value"> 
+                                                            <select  class="form-control" formControlName="haveChildren">
+                                                                <option [ngValue]=''></option>       
+                                                                <option value="false">No</option><option value="true">Yes</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Smoke </div>
+                                                        <div class="profile-info-value">                                   
+                                                            <span>
+                                                                <select  class="form-control" formControlName="smoke">  
+                                                                    <option [ngValue]=''></option>       
+                                                                    <option value="occasionally">Occasionally</option>
+                                                                    <option value="never">Never</option>
+                                                                    <option value="rarely">Rarely</option>
+                                                                    <option value="regularly">Regularly</option>
+                                                                </select> 
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Drink </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <select  class="form-control" formControlName="drink">   
+                                                                    <option [ngValue]=''></option>       
+                                                                    <option value="occasionally">Occasionally</option>
+                                                                    <option value="never">Never</option>
+                                                                    <option value="rarely">Rarely</option>
+                                                                    <option value="regularly">Regularly</option>
+                                                                </select>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Profession </div>
+                                                        <div class="profile-info-value">
+                                                            <select  class="form-control" formControlName="profession">
+                                                                <option [ngValue]=''></option>       
+                                                                <option *ngFor="let s of questions[6].option" value="{{s}}">{{s}}</option>
+                                                            </select> 
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">  </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <button  class="btn btn-success btn-sm" [disabled]="!preferecesUpdateModel.valid">Update</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+
+                                            <div class="hr hr-8 dotted"></div>
+
+                                        </div>
+                                            <!-- /.col -->
+                                    </div>
+
+
+                                    <div class="space-20"></div>
+                                </div>
+                                    <!-- /#Preferences -->
+
+
+                                <div id="photos" class="tab-pane">
+                                    <div class="col-lg-12 text-center">
+
+                                        <form class="form-inline" (submit)="myPhotos()">
+                                            <div class="file-upload">
+                                                <label for="upload-1" class="btn">
+                                                    <a class="btn btn-success" >  Choose files &nbsp; <span class="badge" *ngIf="uploader2?.queue?.length > 0">{{ uploader2?.queue?.length }}</span> </a>
+                                                </label>
+                                                <button type="submit" class="btn btn-success">Upload</button>
+                                                <input (click)="uploader2.clearQueue()" id="upload-1" type="file" class="form-control" ng2FileSelect [uploader]="uploader2" (change)="onChangePhotos($event)" multiple="" style="display:none;">
+                                            </div>
+                                        </form>
+
+                                        <div class="col-lg-6 col-lg-offset-3">
+                                            <div class="progress progress-barn progress-bar-height" *ngIf="objectForCustomerDetail.photosprocess > 0 && objectForCustomerDetail.photosprocess < 100">
+                                                <div class="progress-bar progress-bar-info progress-bar-height" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': objectForCustomerDetail.photosprocess + '%'}">
+                                                    {{objectForCustomerDetail.photosprocess}}%
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <ul class="ace-thumbnails" *ngIf="profile && (profile.myPhotos.length > 0)">
+                                        <li *ngFor="let myPhoto of profile.myPhotos; let i = index; ">
+                                            <a href="{{url}}{{myPhoto}}" data-rel="colorbox" data-lightbox="image-1">
+                                                <img src="{{url}}{{myPhoto}}" class="imagesize1">
+                                            </a>
+                                            <div class="tools tools-bottom">
+                                                <a href="javascript:void(0)" (click)="removephotomulti(profile._id, i)">
+                                                    <i class="ace-icon fa fa-times red"></i>
+                                                </a>
+                                            </div>
+
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                                <div id="youtube" class="tab-pane">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-9 col-md-9">
+                                            <div class="profile-user-info">
+
+                                                <div class="col-sm-12 col-md-12 col-lg-12" style="margin-top: 15px; margin-bottom: 15px;">
+                                                    <form [formGroup]="addVideolinkModel"(ngSubmit)="addVideolink()">
+                                                        <div class="form-group">
+                                                            <label for="videolinks">Video link</label>
+                                                            <textarea class="form-control" style="min-width: 100%" formControlName="videolinks"  placeholder="Youtube link" class="form-control" required ></textarea>
+                                                        </div>
+                                                        <button class="btn btn-lg btn-success btn-block"[disabled]="!addVideolinkModel.valid">Submit</button>
+                                                    </form>                             
+                                                </div>
+
+
+                                                <div class="col-sm-6 col-md-6 col-lg-6 imageshow1" *ngFor="let videolink of profile.videolinks; let i = index; ">
+                                                    <iframe width="100%" height="130px" [src]="(videolink) | safe" allowfullscreen="allowfullscreen" class="imagecls"> 
+                                                    </iframe>
+                                                    <div class="imageshow2 text-center">
+                                                        <div class="removeimage text-center"><i class="fa fa-times-circle" aria-hidden="true" (click)="removeYoutubeLink(profile._id, i)"></i></div>
+                                                    </div> 
+                                                </div>   
+
+                                            </div>
+                                            <div class="hr hr-8 dotted"></div>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+                                    <div class="space-20"></div>
+                                </div>
+
+
+
+                                <!-- /#pictures -->
+                                <div id="videos" class="tab-pane">
+                                    <div class="col-lg-12 text-center">
+                                        <form class="form-inline"  (submit)="myVideo()">
+                                            <div class="file-upload">
+                                                <label for="upload-2" class="btn"><a class="btn btn-success" > Choose files &nbsp;  <span class="badge" *ngIf="uploader3?.queue?.length > 0">{{ uploader3?.queue?.length }}</span></a></label>
+                                                <button type="submit" class="btn btn-success">Upload</button>
+                                                <input id="upload-2" (click)="uploader3.clearQueue()" type="file" class="form-control" ng2FileSelect [uploader]="uploader3" (change)="onChangeVideo($event)" style="display:none;">
+                                            </div>                                    
+                                        </form>
+
+                                        <div class="col-lg-6 col-lg-offset-3">
+                                            <div class="progress progress-barn" *ngIf="objectForCustomerDetail.videoprocess > 0 && objectForCustomerDetail.videoprocess < 100">
+                                                <div class="progress-bar progress-bar-info  progress-bar-height" role="progressbar" aria-valuenow="50"
+                                                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': objectForCustomerDetail.videoprocess + '%'}">{{objectForCustomerDetail.videoprocess}}%</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <ul class="ace-thumbnails" *ngIf="profile">
+                                        <li *ngIf="profile.profileVideo">
+                                            <a href="javascript:void(0)" data-rel="colorbox">
+                                                <video style="width:200px" controls class="imagecls"><source src="{{url}}{{profile.profileVideo}}"></video>
+                                            </a>
+                                            <div class="tools tools-top">
+                                                <a href="javascript:void(0);" (click)="removephotovideo(profile._id)">
+                                                    <i class="ace-icon fa fa-times red"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+
+                                <!-- /#Video -->
+
+                                <div id="changepassword" class="tab-pane">
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-sm-9">
+
+                                            <div class="profile-user-info">
+                                                <form [formGroup]="changePasswordModel"(ngSubmit)="updatepassword()">
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Old Password </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <input formControlName="oldpassword" type="password" class="form-control" id="old" placeholder="old password" (keyup)="oldpassword()">
+                                                                <div style="padding: 3px;" class="alert alert-danger" *ngIf="oldmatch">Old Password not match</div>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> New Password </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <input formControlName="password" type="password" class="form-control" placeholder="new password" (keyup)="matchpassword()">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Confirm Password </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <input formControlName="confirmpassword" type="password" class="form-control" id="confirm" placeholder="confirm password" (keyup)="matchpassword()">
+                                                            </span>
+                                                            <div style="padding: 3px;" class="alert alert-danger" *ngIf="Match">Password not match</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">  </div>
+                                                        <div class="profile-info-value">
+                                                            <span>
+                                                                <button  class="btn btn-success btn-sm" [disabled]="!changePasswordModel.valid">Update</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="hr hr-8 dotted"></div>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <div class="space-20"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Membership -->
+                <div class="" id="tab_b" *ngIf = "paramtype == 'membership'">
+
+                    <div id="user-profile-2" class="user-profile">
+
+                        <div class="tabbable">
+
+                            <ul class="nav nav-tabs padding-18">
+
+                                <li class="active">
+                                    <a data-toggle="tab" href="#mymembership">
+                                        <i class="green ace-icon fa fa-user bigger-120"></i> My Membership
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a data-toggle="tab" href="#membershipplan">
+                                        <i class="pink ace-icon fa fa-picture-o bigger-120"></i> Membership Plans
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content no-border padding-24">
+
+                                <div id="mymembership" class="tab-pane in active">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3"  *ngIf="profile.mypackage">
+                                            <!-- <span>{{defaults}}</span> -->
+                                            <!-- PRICE ITEM -->
+                                            <div class="panel price panel-green">
+
+                                                <div class="panel-heading arrow_box text-center">
+                                                    <div class="row " style="padding-bottom: 16px;" *ngIf="!profile.mypackage._id">No Package</div>  
+
+                                                    <h5 style="text-transform: uppercase;">{{profile.mypackage.name}}</h5>
+                                                </div>
+                                                <div class="panel-body text-center">
+                                                    <p class="lead" style="font-size:20px"><strong>{{profile.mypackage.noofcalls}} / Calls</strong></p>
+                                                </div>
+                                                <ul class="list-group list-group-flush text-center">
+                                                    <li class="list-group-item"><i class="icon-ok text-success"></i> {{profile.mypackage.remaincalls}} / Remain Calls</li>
+                                                </ul>
+                                                <div class="panel-footer">
+                                                    <a class="btn btn-lg btn-block btn-success">Purchanged</a>
+                                                </div>
+                                            </div>
+                                            <!-- /PRICE ITEM -->
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+                                    <div class="space-20"></div>
+                                </div>
+                                <!-- /#mymembership -->
+                                <div id="membershipplan" class="tab-pane">
+                                    <div class="row">
+
+
+
+                                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" *ngFor="let package of packages">
+                                            <div class="panel price panel-red">
+                                                <div class="panel-heading  text-center">
+                                                    <h5 style="text-transform: uppercase;">{{package.name}}</h5>
+                                                </div>
+                                                <div class="panel-body text-center">
+                                                    <p class="lead" style="font-size:20px"><strong>{{package.noofcalls}} / Calls</strong></p>
+                                                </div>
+                                                <ul class="list-group list-group-flush text-center">
+                                                    <li class="list-group-item"><i class="icon-ok text-danger"></i> {{package.price}} / Price</li>
+                                                    <li class="list-group-item"><i class="icon-ok text-danger"></i> Video Calls </li>                                        
+                                                </ul>
+                                                <div class="panel-footer">
+                                                    <a class="btn btn-lg btn-block btn-danger" href="javascript:void(0)" (click)="choosePackage(package)">BUY NOW!</a>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="hr hr-8 dotted"></div>
+
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <div class="space-20"></div>
+
+                                </div>
+                                <!-- /#membershipplan -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Friends -->
+                <div class="" id="tab_c" *ngIf = "paramtype == 'friends'">
+                    <div id="user-profile-2" class="user-profile">
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs padding-18">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#myfriends" (click)="myFriends()">
+                                        <i class="green ace-icon fa fa-user bigger-120"></i> Friends
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#mypendingrequests" (click)="myPendingRequests()">
+                                        <i class="pink ace-icon fa fa-picture-o bigger-120"></i> Pending Requests
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#myblocked" (click)="myBlocked()">
+                                        <i class="pink ace-icon fa fa-picture-o bigger-120"></i> Blocked
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content no-border padding-24">
+
+                                <div id="myfriends" class="tab-pane in active">
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-sm-9 col-lg-12" *ngIf="profiles">
+
+                                            <!-- <div class="profile-user-info"> --> <!--  *ngIf="friendTab == 'myfriends'" -->
+                                                <app-common-listing [customers]="profiles" (changeSomething)="someEvent($event)"></app-common-listing>
+                                            <!-- </div> -->
+
+                                            <div class="hr hr-8 dotted"></div>
+                                        </div>
+
+                                        <!-- /.col -->
+
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <div class="space-20"></div>
+                                </div>
+                                
+                                <div id="mypendingrequests" class="tab-pane">
+                                    <div class="row">
+                                        <ul class="nav nav-tabs padding-18">
+                                            <li class="active">
+                                                <a data-toggle="tab" (click)="filterPendingRequest('sent')">Request Sent</a>
+                                            </li>
+
+                                            <li>
+                                                <a data-toggle="tab" (click)="filterPendingRequest('receive')">Requests Receive</a>
+                                            </li>
+                                        </ul>
+
+                                        <div class="tab-content">
+                                            <div class="col-xs-12 col-sm-9 col-lg-12">
+                                                <!-- <div class="profile-user-info"> --><!--  *ngIf="friendTab == 'mypendingrequests'" -->
+                                                    <app-common-listing [customers]="profiles" (changeSomething)="someEvent($event)"></app-common-listing>
+                                                <!-- </div> -->
+
+                                                <div class="hr hr-8 dotted"></div>
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <div class="space-20"></div>
+                                </div>
+
+                                <div id="myblocked" class="tab-pane">
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-sm-9 col-lg-12">
+
+                                            <div *ngIf = "profiles.length > 0" class="profile-user-info"><!--  *ngIf="friendTab == 'myblocked'" -->
+                                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngFor="let user of profiles">
+                                                    <div class="panel card panel-default">
+                                                        <div class="panel-headingc card-img2">
+                                                            <img class="card-img-top card-img  img-fluid" [src]="checkImage(user.profilePic)" alt="Card image cap">
+                                                        </div>
+                                                        <div class="panel-body" style="padding: 0px;">
+                                                            <div class="card-body text-center">
+                                                                <h5 class="card-title cardusername"><span>{{user.username}}</span></h5>
+                                                                <p class="card-text text-muted cardlitleinfo" style="margin-bottom: 0px;">{{user.age}}, {{user.cityName}} ,{{user.countryName}}</p>
+                                                                <ul class="list-inline profile-icons d-flex justify-content-around">
+                                                                    <li class="list-inline-item"><a class="social-icon text-xs-center text-primary"  href="javascript:void(0)" data-balloon="Unlock" data-balloon-pos="down" (click)="unblockrequest(user._id)"><i class="icon ion-android-unlock text-purple" aria-hidden="true" style="font-size:20px;"></i></a></li>
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div *ngIf = "profiles.length == 0" class="profile-user-info">
+                                                No Blocked Users!
+                                            </div>
+
+                                            <div class="hr hr-8 dotted"></div>
+                                        </div>
+
+                                        <!-- /.col -->
+
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <div class="space-20"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message -->
+                <div class="" id="tab_d" *ngIf = "paramtype == 'message'">
+
+                    <div id="user-profile-2" class="user-profile">
+                        <div class="tabbable">
+
+                            <ul class="nav nav-tabs padding-18">
+
+                                <li class="active">
+                                    <a data-toggle="tab" href="#message" (click)="myMessage()">
+                                        <i class="green ace-icon fa fa-user bigger-120"></i> Messages
+                                    </a>
+                                </li>                                    
+                            </ul>
+
+                            <div class="tab-content no-border padding-24">
+
+                                <div id="message" class="tab-pane in active">
+                                    <div class="profile-feed row">
+                                        <div class="col-sm-8" *ngIf="unreadMessages.length > 0">
+                                            <div class="profile-activity clearfix" *ngFor="let message of unreadMessages">
+
+                                                <a (click)="selectChat(message.id._id)" href="javascript:void(0);">
+                                                    <div>
+                                                        <img class="pull-left" alt="{{message.id.username}}" src="{{url}}{{message.id.profilePic}}" style="max-width: 55px;
+                                                        height: 55px;">
+                                                        <span class="badge badge-notify noti6" *ngIf="message.unreadMessage > 0"> {{message.unreadMessage}}</span>
+                                                        <a class="user"  href="javascript:void(0);" (click)="selectChat(message.id._id)" > {{message.id.username}} </a>
+
+
+
+                                                        <div class="time lastmessage"> {{message.messages[message.messages.length -1].message}} </div>
+                                                        <div class="time">
+                                                            <i class="ace-icon fa fa-clock-o bigger-110"></i> <span >{{message.messages[message.messages.length -1].created_at | date:'medium'}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tools action-buttons">
+                                                        <a href="javascript:void(0)" class="blue">
+                                                            <i class="ace-icon ion-chatbox-working bigger-125 bigger1"></i>
+                                                        </a>
+                                                    </div>
+                                                </a>
+
+                                            </div>
+
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <div class="space-12"></div>
+
+                                </div>
+                                <!-- /#feed -->
+                                <!-- /#mymembership -->
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification -->
+                <div class="" id="tab_f" *ngIf = "paramtype == 'notification'">
+
+                    <div id="user-profile-2" class="user-profile">
+                        <div class="tabbable">
+
+                            <ul class="nav nav-tabs padding-18">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#notifications" (click)="getnotifications()">
+                                        <i class="pink ace-icon fa fa-picture-o bigger-120"></i> Notifications
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content no-border padding-24">
+
+                                <div id="notifications" class="tab-pane in active">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-9 col-lg-12" style="max-height: 500px;
+                                        overflow-y: scroll;">
+                                            <div class="profile-user-info" *ngIf="notificationsdata.length > 0">
+                                                <div class="profile-activity clearfix" *ngFor="let notifications of notificationsdata">
+                                                    <div>
+
+                                                        <img class="pull-left" alt="{{notifications.FromId.username}}" src="{{url}}{{notifications.FromId.profilePic}}" style="max-width: 55px;height: 55px;">
+
+                                                        <a class="user" href="javascript:void(0);" style="text-transform: capitalize;"> {{notifications.FromId.username | ellipsis:10}} </a>
+
+                                                        <span class="noti2" *ngIf="notifications.title == 'view'" >Viewed Your Profile.</span>
+                                                        <span class="noti2" *ngIf="notifications.title == 'request'" >Send request to you.</span>
+                                                        <span class="noti2" *ngIf="notifications.title == 'accept'" >Accepted Your request.</span> 
+                                                        <div class="time">
+                                                            <i class="ace-icon fa fa-clock-o bigger-110"></i> {{notifications.created_at | date:'medium'}}
+                                                        </div>
+                                                    </div>
+
+                                                <div class="tools action-buttons"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="hr hr-8 dotted"></div></div>
+
+                                        <!-- /.col -->
+                                    </div>
+
+                                    <!-- /.row -->
+                                    <div class="space-20"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visitor -->
+                <div class="" id="tab_e" *ngIf = "paramtype == 'visitor'">
+
+                    <div id="user-profile-2" class="user-profile">
+                        <div class="tabbable">
+
+                            <ul class="nav nav-tabs padding-18">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#viewed" (click)="myViewed()">
+                                        <i class="pink ace-icon fa fa-picture-o bigger-120"></i> Visitors
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content no-border padding-24">
+                                <div id="viewed" class="tab-pane in active">
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-sm-9 col-lg-12">
+
+                                            <div class="profile-user-info"><!-- *ngIf="friendTab =='views'" -->
+                                                <app-common-listing [customers]="profiles" (changeSomething)="someEvent($event)"></app-common-listing>
+                                            </div>
+
+                                            <div class="hr hr-8 dotted"></div>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+                                    <div class="space-20"></div>                                  
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

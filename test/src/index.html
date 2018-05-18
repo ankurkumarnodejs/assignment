@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Speed Dating</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.css" />
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./assets/css/bootstrap-datetimepicker.css">  
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/sb-admin.css">
+  <link rel="stylesheet" href="./assets/css/toastr.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css"> 
+  <link rel="stylesheet" href="./assets/css/slick.css"> 
+  <link rel="stylesheet" href="./assets/css/slick-theme.css"> 
+  <link rel="stylesheet" href="./assets/css/shubham.css"> 
+  <link rel="stylesheet" href="./assets/css/ankur.css"> 
+  <link rel="stylesheet" href="./assets/css/chat.css">        
+  <link rel="stylesheet" href="./assets/css/video-default.css"> 
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">       
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    
+    $(document).ready(function(){
+       $(function() {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+     });
+
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.9.0/css/bootstrap-slider.min.css" />
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.js"></script> 
+  <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>  
+  <script src="./assets/js/toastr.min.js"></script> 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYQoBlDYqxMVhiiZFTzWljTUi84ZwoA6g&libraries=places"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.9.0/bootstrap-slider.min.js"></script>
+  <script src="./assets/js/moment.js"></script>
+  <script src="./assets/js/bootstrap-datetimepicker.min.js"></script>   
+  <script src="./assets/js/slick.js"></script> 
+  <!-- <script src="https://static.opentok.com/v2/js/opentok.min.js"></script> -->
+</head>
+<body>
+  <app-root></app-root>
+</body>
+
+   <script>
+
+    lightbox.option();
+
+     $("#ex2").slider();  
+
+        $('filter-box .closebtn').hide();
+        $('#myfilter').hide();
+
+        function openFilter() {
+            /*       document.getElementById("myfilter").style.height = "100%"; */
+
+            $('#myfilter').removeClass('animated fadeOutDown');
+            $('#myfilter').addClass('animated fadeInDown');
+            $('#myfilter').show();
+            $('filter-box .closebtn').show();
+        }
+
+        function closeFilter() {
+            $('#myfilter').removeClass('animated fadeInDown');
+            $('#myfilter').addClass('animated fadeOutDown');
+            $('filter-box .closebtn').hide();
+            $('#myfilter').hide();
+        }
+    </script>
+</html>

@@ -1,0 +1,410 @@
+
+<div class="fb-profile" *ngIf="profile">
+        <div class="cover-img">
+            <div class="count text-center">
+                <ul class="list-inline count-list inline-blk">
+                    <li class="list-inline-item" *ngIf="friendslen">{{friendslen.length}} <br>Friends</li>
+                    <li class="list-inline-item" >{{profile.visitors.length}} <br>Visitors</li>
+                    <li class="list-inline-item">{{profile.myPhotos.length}}<br>Photos</li>
+                    <li class="list-inline-item"><span *ngIf="profile.profileVideo"> 1 </span> <span *ngIf="!profile.profileVideo"> 0 </span><br>Video</li>
+                </ul>
+            </div>
+        </div>
+       <span *ngIf="profile">
+         <img  align="left" class="fb-image-profile  img-circle img-responsive publicimgsize"  *ngIf="profile.profilePic" src="{{url}}{{profile.profilePic}}" height="50"/> 
+         <img  align="left" class="fb-image-profile  img-circle img-responsive publicimgsize"  *ngIf="!profile.profilePic" src="../../../assets/images/face.png" height="50"/> 
+      </span>
+        <div class="fb-profile-text ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <h3 class="user-name capitalize1">{{profile.username}}</h3>
+                        <h5 class="text-muted user-location">{{profile.age}}<i *ngIf="profile.cityName">,</i> {{profile.cityName}}<i *ngIf="profile.countryName">,</i> {{profile.countryName}}</h5>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+
+<ul class="list-inline profile-icons justify-content-around inline-blk" *ngIf="this.vid != this.customerInfo._id">
+
+                 <span *ngFor="let friend of friends" style="margin: auto;"> 
+                
+                <li class="list-inline-item" *ngIf="(this.vid == friend.FromId._id) && friend.status == 0" (click)="acceptrequest(friend._id, this.vid)"> 
+                    <a data-balloon="Accept" data-balloon-pos="down"  class="social-icon text-xs-center text-info pointer1"  >
+                    <i class="fa fa-check-circle text-grey1 faiconsize text-purple" aria-hidden="true"></i>
+                    </a>
+                 </li>
+
+
+                <li  class="list-inline-item" *ngIf="(this.vid == friend.FromId._id)  && friend.status == 0" (click)="deleteBlock(friend._id)">                 
+                <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Cancel" data-balloon-pos="down"> 
+                <i class="fa fa-times-circle-o text-grey1 faiconsize text-red" aria-hidden="true"></i> 
+                </a>
+                </li>
+                
+                <li class="list-inline-item" *ngIf="(this.vid == friend.FromId._id || this.vid == friend.ToId._id) && friend.status == 1" (click)="deleteBlock(friend._id)">
+                <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Unfriend" data-balloon-pos="down">
+                 <i class="fa fa-minus-circle text-grey1 faiconsize" aria-hidden="true"></i>
+                 </a>
+                 </li>
+            
+                <li class="list-inline-item" *ngIf="(this.customerInfo._id == friend.FromId._id && this.vid == friend.ToId._id) && friend.status == 0" >
+                 <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Sent Request" data-balloon-pos="down">
+                 <i class="fa fa-share-square text-info faiconsize text-purple" aria-hidden="true" ></i> 
+                 </a>
+                </li>
+
+
+                <li class="list-inline-item"  *ngIf="(this.customerInfo._id == friend.FromId._id && this.vid == friend.ToId._id) && friend.status == 0" (click)="deleteBlock(friend._id)">
+                <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Cancel" data-balloon-pos="down">
+                <i class="fa fa-times-circle-o text-grey1 faiconsize text-red" aria-hidden="true"></i>
+                </a>
+                </li>
+
+                <li class="list-inline-item" *ngIf="(this.customerInfo._id == friend.FromId._id && this.vid == friend.ToId._id) && friend.status == 2" (click)="unblockrequest(friend, 2)"><a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Block" data-balloon-pos="down"><i class="fa fa-ban text-grey1 faiconsize text-red" aria-hidden="true"></i></a></li>  
+
+                <li class="list-inline-item" *ngIf="(this.customerInfo._id == friend.FromId._id && this.vid == friend.ToId._id) && friend.status == 4" (click)="unblockrequest(friend, 4)"> <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Unblock" data-balloon-pos="down"><i class="fa fa-unlock-alt text-grey1 faiconsize" aria-hidden="true"></i></a></li> 
+
+                </span> 
+                
+                <li class="list-inline-item" *ngIf="checkforinvite(this.vid)" (click)="sendRequest(this.vid)">
+                <a class="social-icon text-xs-center text-danger pointer1"   data-balloon="Add Friend" data-balloon-pos="down">
+                <i class="fa fa-user-plus text-grey1 faiconsize text-purple" aria-hidden="true"></i>
+                </a>
+                </li>
+
+                <li class="list-inline-item" *ngIf="checkforinvite(this.vid)" (click)="anyBlockRequest(this.vid)">
+                <a class="social-icon text-xs-center text-danger" href="javascript:void(0)" data-balloon="Block" data-balloon-pos="down">
+                <i class="fa fa-ban text-warning faiconsize text-red" aria-hidden="true"></i>
+                </a>
+                </li>
+
+                    <li class="list-inline-item"><a class="social-icon text-xs-center text-primary" href="javascript:void(0)" data-balloon="Message" data-balloon-pos="down" (click)="selectNewChat()"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+                  
+                  <li class="list-inline-item" *ngIf="myonline.indexOf(this.vid) == -1"><a data-balloon="Not Online" data-balloon-pos="down" class="social-icon text-xs-center" href="javascript:void(0)"><i class="fa fa-video-camera" aria-hidden="true" style="color: lightgrey; font-size: 20px;"></i></a></li>
+                  
+                  <li class="list-inline-item" *ngIf="myonline.indexOf(this.vid) != -1"><a data-balloon="Video Call" data-balloon-pos="down" class="social-icon text-xs-center" href="javascript:void(0)"><i class="fa fa-video-camera text-grey1 text-green faiconsize" (click)="vediocall(this.vid)"></i></a></li>  
+
+                   <!--  <span *ngIf="customerInfo.mypackage">
+                    <li class="list-inline-item" *ngIf="myonline.indexOf(this.vid) == -1"><a data-balloon="Not online" data-balloon-pos="down" class="social-icon text-xs-center" target="_blank" href="javascript:void(0)"><i class="fa fa-video-camera" aria-hidden="true" style="color: lightgrey; font-size: 20px;"></i></a></li>
+                    </span>
+
+                    <li class="list-inline-item" *ngIf="customerInfo.mypackage && (customerInfo.mypackage.remaincalls > 0) && (myonline.indexOf(this.vid) != -1)">
+                    <a class="social-icon text-xs-center text-success pointer1"   data-balloon="Video Call" data-balloon-pos="down" data-toggle="modal" data-target="#videocalloutgoing">
+                    <i class="fa fa-video-camera text-grey1 text-green faiconsize" (click)="vediocall(this.vid)"></i>
+                    </a>                
+                    </li>  -->
+
+
+                    <li class="list-inline-item"><a class="social-icon text-xs-center text-success" href="javascript:void(0)" data-balloon="Abuse Report" data-balloon-pos="down"><i aria-hidden="true" class="chat-head-sign fa fa-bug" data-target="#report1" data-toggle="modal" style="color: red;"></i></a></li>
+
+
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container" *ngIf="profile">
+        <div class="user-detail">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="panel panel-default panel-black">
+                        <h5 class="panel-heading">About</h5>
+                        <div class="panel-body">
+                            <div class="col-lg-12">
+                            <div class="col-lg-6" >
+                                <div class="profile-user-info">
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Gender </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="capitalize1">{{profile.gender}}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Height </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span  class="capitalize1" *ngIf="profile.height"> {{profile.height}} CM </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Sexual Orientation </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span  class="capitalize1" class="capitalize1">{{profile.sexualorient}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Hair Color </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="capitalize1">{{profile.haircolor}}</span>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="profile-info-row" *ngIf="profile.interests.length > 0">
+                                                    <div class="profile-info-name"> Interests </div>
+                                                    <div class="profile-info-value">
+                                                    <ul class="tags capitalize1">
+                                                        <span *ngFor="let tag of profile.interests">
+                                                    <li><a class="tag">{{tag}}</a></li>
+                                                        </span>
+                                                    </ul>
+                                                    </div>
+                                                    </div>                                                  
+                                                </div>
+                                            </div>
+                                             <div class="col-lg-6" >
+                                                <div class="profile-user-info">
+                                                 <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Body Shape </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="capitalize1">{{profile.bodyshape}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Marital Status </div>
+
+                                                        <div class="profile-info-value" >
+                                                            <span *ngIf="profile.maritalStatus == true">Yes</span>
+                                                            <span *ngIf="profile.maritalStatus == false">No</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name capitalize1"> Smoke </div>
+
+                                                        <div class="profile-info-value" >
+                                                            <span class="capitalize1">{{profile.smoke}}</span>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Drink </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="capitalize1">{{profile.drink}}</span>
+                                                          
+                                                        </div>
+                                                    </div>                                                  
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Profession </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="capitalize1">{{profile.profession}}</span>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default panel-black">
+                        <h5 class="panel-heading">  Little About Me  </h5>
+                        <div class="panel-body">
+                            <p >
+                              {{profile.description}}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default panel-black" *ngIf="profile.preferences">
+                        <h5 class="panel-heading">Preferences</h5>
+                        <div class="panel-body">
+                             <div class="col-lg-12">
+                             <div class="col-lg-6" >
+                                <div class="profile-user-info">
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Height </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span  class="capitalize1" *ngIf="profile.preferences.minheight"> {{profile.preferences.minheight}} - {{profile.preferences.maxheight}} CM </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Interested In </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span  class="capitalize1">{{profile.preferences.interestedin}}</span>
+                                                        </div>
+                                                     </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Sexual Orientation </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span  class="capitalize1">{{profile.preferences.sexualorient}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Hair Color </div>
+
+                                                        <div class="profile-info-value" >
+                                                            <span>{{profile.preferences.haircolor}}</span>
+                                                        </div>
+                                                    </div>                                                   
+                                              
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-6" >
+                                                <div class="profile-user-info">
+                                                 <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Body Shape </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span>{{profile.preferences.bodyshape}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Marital Status </div>
+
+                                                        <div class="profile-info-value" >
+                                                            <span *ngIf="profile.preferences.maritalStatus == true">Yes</span>
+                                                            <span *ngIf="profile.preferences.maritalStatus == false">No</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Smoke </div>
+
+                                                        <div class="profile-info-value" >
+                                                            <span class="capitalize1">{{profile.preferences.smoke}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Drink </div>
+
+                                                        <div class="profile-info-value" >
+                                                            <span class="capitalize1">{{profile.preferences.drink}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Profession </div>
+
+                                                        <div class="profile-info-value" >
+                                                            <span>{{profile.preferences.profession}}</span>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                        </div>
+                    </div>
+
+
+
+
+                <div class="panel panel-default panel-black">
+                <h5 class="panel-heading">Gallery </h5>
+                <div class="panel-body">
+                <ul class="ace-thumbnails" *ngIf="profile && (profile.myPhotos.length > 0)">
+                <li *ngFor="let myPhoto of profile.myPhotos; let i = index; ">
+                <a href="{{url}}{{myPhoto}}" data-rel="colorbox" data-lightbox="image-1">
+                <img src="{{url}}{{myPhoto}}" class="imagesize1">
+                </a>
+                </li>                                            
+                </ul>
+                <p class="text-center" *ngIf="profile.myPhotos.length == 0"> Not Available Info.</p>
+                </div>
+                </div>
+
+
+
+                <div class="panel panel-default panel-black">
+
+                <h5 class="panel-heading" style="clear: both;">My Video </h5>
+                <div class="panel-body">
+                <ul>    
+                <li *ngIf="profile.profileVideo" class="list-style: none;">
+                <a href="javascript:void(0)" data-rel="colorbox">
+                <video style="width:250px;" controls class="imagecls">
+                <source src="{{url}}{{profile.profileVideo}}">
+                </video>
+                </a>
+                </li>
+                </ul>
+                <p class="text-center" *ngIf="profile.videolinks.length == 0"> Not Available Info.</p>
+                </div>
+                </div>
+
+
+
+<br>
+
+                <div class="panel panel-default panel-black">
+                <h5 class="panel-heading">Youtube </h5>
+                <div class="panel-body">
+                <div class="col-sm-4 col-md-4 col-lg-4 imageshow1" *ngFor="let videolink of profile.videolinks; let i = index; " style="padding-left: 0px; padding-right: 0px; ">
+                <iframe width="100%" height="140px" [src]="(videolink) | safe" allowfullscreen="allowfullscreen" class="imagecls"> 
+                </iframe>
+                </div>
+                <p class="text-center" *ngIf="profile.videolinks.length == 0"> Not Available Info. </p>
+                </div>
+                </div>
+                </div>
+                <div class="col-lg-3"><img src="http://via.placeholder.com/300x500" class="img-responsive"></div>
+            </div>
+        </div>
+    </div>
+
+
+  <div class="modal fade" id="report1">
+     <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="addmodel"(ngSubmit)="sendReport()">                            
+            <div class="form-group">
+            <label for="new"> Report Description : </label>
+                <textarea formControlName="description" type="text" class="form-control" id="new" placeholder="Description .." rows="10" cols="50"></textarea> 
+            </div> 
+            <button class="btn btn-lg btn-success btn-block" [disabled]="!addmodel.valid">Submit</button>
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+<div class="modal fade" id="videocalloutgoing" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4>Outgoing video call to.. <button class="btn btn-danger new_process pull-right" (click)="videocallcancel()">Decline</button></h4>
+        </div>
+        <div class="modal-body text-center">          
+
+     <div class="new_process" *ngIf="callingto" >
+      <img  *ngIf="callingto.profilePic" src="{{url}}{{callingto.profilePic}}" style="width: 100px;
+    height: 100px;" />    
+      <img *ngIf="!callingto.profilePic"  src="/assets/images/face.png" style="width: 100px;
+    height: 100px;" /> 
+      </div>
+
+    <h4 *ngIf="callingto" class="text-center">{{callingto.username}}</h4>
+    <h5 class="myconnect new_process new_process1">
+      <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> &nbsp; <br> 
+      <p>Now You are making call ...</p>
+     </h5>
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+    

@@ -1,0 +1,93 @@
+
+<div class="chatview_port"> 
+  <span *ngFor="let chat of chatLists">
+  <div class="popup-box chat-popup popup-box-on" id="qnimate" [ngStyle]="chat.openBox == 'close'? 'display:none;' : ''">
+    <div class="popup-head">
+    <span *ngFor="let ni of onlinelistforchat" >     
+    <span style="color: green;" class="chat-head-sign glyphicon glyphicon-record" *ngIf="ni.email == chat.email"></span>
+    </span> <span style="text-transform: capitalize;">{{chat.username | ellipsis:10}}</span>
+    <div class="chat-sign"> 
+       <i class="chat-head-sign fa fa-bug" aria-hidden="true" data-toggle="modal" data-target="#report2" (click)="setvid(chat.toCustId)"></i>        
+      <span class="chat-head-sign glyphicon glyphicon-remove" (click)="removechatBox(chat.toCustId)"></span>
+    </div>
+    </div>
+    <div class="popup-messages">      
+    <ul class="messages">       
+      <li class="message appeared" *ngFor="let msg of chat.messages" [ngClass]="msg.fromCustId == this.cid ? 'right' : 'left'">      
+      <div class="text_wrapper">
+      <div class="text" style="text-align: left;">{{msg.message}}</div>
+      <!-- <div style="text-align: left;font-size: 9px;">{{msg.created_at | date:'shortTime'}}</div> -->
+      </div>
+      </li>
+    </ul>
+    </div>
+    <div class="popup-messages-footer">
+      <textarea id="status_message" placeholder="Type a message..." [(ngModel)]="chat.typing" 
+            (keyup)="sendMessage($event, chat.typing, chat.toCustId, chat.toSocketId)"></textarea>
+      <div class="btn-footer">
+        <button class="bg_none"><i class="glyphicon glyphicon-film"></i> </button>
+        <button class="bg_none"><i class="glyphicon glyphicon-camera"></i> </button>
+        <button class="bg_none"><i class="glyphicon glyphicon-paperclip"></i> </button>
+        <button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
+      </div>
+    </div>
+  </div>
+  </span>
+</div>
+
+
+
+  <div class="modal fade" id="videocallincoming" role="dialog"  data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4 class="text-center"> Incoming video call from...</h4>
+        </div>
+        <div class="modal-body text-center">
+           <div class="modal-body" *ngIf="callingto">
+      <div class="new_process" >
+      <img  *ngIf="callingto.profilePic" src="{{url}}{{callingto.profilePic}}" style="width: 100px;
+    height: 100px;" />    
+      <img *ngIf="!callingto.profilePic"  src="/assets/images/face.png" style="width: 100px;
+    height: 100px;" /> 
+    <br>
+     <h4>{{callingto.username}}</h4>
+     </div>
+    </div>
+    <br>
+    <button class="btn btn-success mybv" (click)="receivemodel('yes')"> Accept </button>
+    <button class="btn btn-danger mybv" (click)="receivemodel('no')"> Decline </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+   <div class="modal fade" id="report2" role="dialog">
+     <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+
+        <div class="modal-body">
+
+          <form [formGroup]="addmodel"(ngSubmit)="sendReport()">                            
+            <div class="form-group">
+            <label for="new"> Report Description : </label>
+                <textarea formControlName="description" type="text" class="form-control" id="new" placeholder="Description .." rows="10" cols="50"></textarea> 
+            </div> 
+            <button class="btn btn-lg btn-success btn-block" [disabled]="!addmodel.valid">Submit</button>
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

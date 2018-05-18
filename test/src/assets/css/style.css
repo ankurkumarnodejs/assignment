@@ -1,0 +1,994 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif ;
+    background: rgba(220, 220, 220, 0.56);
+}
+.gap{
+    margin-top: 70px;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    min-height: 650px;
+    float: left;
+    background-color: rgba(0, 0, 0, 0.67);
+  /*height: 60px;
+  height: -webkit-calc(100vh);
+  height: -moz-calc(100vh);
+  height: calc(100vh);*/
+}
+.overlay2 {
+    width: 100%;
+    height: 100%;
+    float: left;
+  /*  background-color: rgba(108, 0, 255, 0.32);*/
+}
+
+
+/**********************************header************************************/
+
+header {
+    width: 100%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+    background-image: url(../images/banner.jpg);
+}
+
+.logo img {
+    margin: 3em 0;
+}
+
+.loginForm1,
+.forgotPassLink {
+    width: 100%;
+}
+
+.loginForm1 form {
+    float: right;
+    margin: 3em 0 10px 0;
+}
+
+.loginForm1 form input {
+    padding: 5px 10px;
+    margin-right: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 3px;
+    border: none;
+    min-width: 200px;
+    outline: none;
+    color: #fff;
+}
+
+.loginForm1 form button {
+    padding: 5px 10px;
+    background-color: #ff0000;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    color: #fff;
+}
+
+.forgotPassLink a {
+    float: right;
+    color: #fff;
+}
+
+.bannerText {
+    color: #fff;
+    margin-top: 46px;
+}
+.bannerText h1
+{
+    color: #e82618;
+    font-size: 3.5em;
+    font-weight: 300;
+}
+.bannerText h2
+{
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: 300;
+}
+.bannerSlogan
+{
+    margin-top: 4.5em;
+}
+.bannerSlogan p
+{
+    text-align: right;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 300;
+}
+.bannerSlogan p span
+{
+    color: #e82618;
+}
+.bannerSlogan p cite{
+    font-size:0.8em;
+    font-weight: 400;
+    margin-bottom: 1em;
+}
+.registerForm {
+    width: 100%;
+    float: left;
+    /*margin-top: 2em;*/
+    background-color: rgba(12, 18, 27, 0.76);
+    border-radius: 10px;
+    padding: 1em;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.6);
+    margin-bottom: 3em;
+}
+
+.formRow {
+    width: 100%;
+    float: left;
+}
+
+.formRow label,
+.formRow input[type="text"],.formRow input[type="email"],.formRow input[type="password"] {
+    width: 100%;
+    float: left;
+}
+
+.formRow label {
+    padding: 0.6em 0;
+    color: #fff;
+}
+
+.formRow input[type="text"],.formRow input[type="email"],.formRow input[type="password"] {
+    padding: 0.6em;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+.formRow >ul >li {
+    float: left;
+    color: #fff;
+    margin-right: 1em;
+    margin-bottom: 10px;
+}
+
+.formRow button {
+    margin: auto;
+    padding: 5px 10px;
+    background-color: #ff0000;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    color: #fff;
+}
+/**********************************content2************************************/
+
+.content2
+{
+    width: 100%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+    background-image: url(../images/banner2.jpg);
+}
+.content2ul
+{
+    padding: 11em 0;
+}
+.content2ul li
+{
+    width: 100%;
+    float: left;
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.6);
+    padding: 1em;
+    margin: 10px 0;
+    font-size: 1.5em;
+}
+.content2ul li i
+{
+    color: #a80936;
+}
+.content2ul li span
+{
+    font-weight: bold;
+    padding-left: 10px;
+}
+/************************Content3*************************/
+.content3
+{
+    width: 100%;
+    float: left;
+    background-color: #fff;
+    margin: 3em 0;
+    text-align: center;
+}
+.addedProfiles li
+{
+    display: inline-block;
+    width: 16%;
+    margin-top: 1em;
+}
+.addedProfiles li a
+{
+    display: inline-block;
+    width: 100%;
+    color: #999;
+    text-decoration: none;
+}
+.addedProfiles li a img
+{
+    display: inline-block;
+    margin: 1em 0;
+    border-radius: 50%;
+}
+.addedProfiles li a p
+{
+    margin-bottom: 5px;
+    color: #f44336;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.addedProfiles li a span{
+    font-size: 0.8em;
+}
+
+/************************Content4*************************/
+
+.content4
+{
+    width: 100%;
+    float: left;
+    background-color: #fff;
+    margin: 3em 0;
+}
+.content4Div
+{
+    text-align: center;
+    padding: 2em 0;
+}
+.content4Div div i
+{
+    color: #fff;
+    font-size: 5em;
+    margin:1em 0 0.5em 0;
+}
+.content4Div div p a{
+    display: inline-block;
+    padding: 1em;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+.colorOne
+{
+    background-color: #f44336;
+}
+.colorOne a
+{
+    background-color: #d32f2f;
+}
+.colorTwo
+{
+    background-color: #fe5621;
+}
+.colorTwo a
+{
+    background-color: #e54918;
+}
+.colorThree
+{
+    background-color: #e81d62;
+}
+.colorThree a
+{
+    background-color: #c1175a;
+}
+/************************Advertise*************************/
+
+.advertise {
+    width: 100%;
+    height: auto;
+    float: left;
+    background-size: cover; 
+    background-image: url(../images/banner3.png); 
+}
+
+.advertiseInfo { 
+    padding: 3em;
+    text-align: center;
+}
+.advertiseInfo h2
+{
+    font-weight: 300;
+    color: #fff;
+    font-size: 2.5em;
+    margin-bottom: 0.6em;
+}
+.advertiseInfo h3
+{
+    font-size: 1.1em;
+    color: #fcfcfc;
+    font-weight: 300;
+    margin-bottom: 1em;
+    line-height: 28px;
+}
+.advertiseInfo ul
+{
+    margin:auto;
+}
+.advertiseInfo ul li
+{
+    display: inline;
+    margin-right: 1em;
+}
+.advertiseInfo ul li a
+{
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 0.5em;
+    color: #333;
+}
+.advertiseInfo ul li a i
+{
+    float: left;
+    font-size: 3em;
+    margin-left: 10px;
+}
+.advertiseInfo ul li a p
+{  
+    width: 75%;
+    float: left;
+    margin: 0;
+    text-align: left; 
+    padding-left: 10px;
+}
+.advertiseInfo ul li a span
+{  
+    width: 75%;
+    float: left;
+    margin: 0; 
+    font-size: 1.4em;
+    text-align: left; 
+    padding-left: 10px;
+}
+
+/**********************************footer************************************/
+
+footer {
+    width: 100%;
+    float: left;
+    background-color: #222222;
+    padding: 2em 0 1em 0;
+}
+
+.footerSection1 {
+    color: #888888;
+    border: solid 1px #505050;
+    padding: 2em;
+}
+
+.footerSection1 p {
+    font-size: 1.1em;
+    line-height: 1.7em;
+    padding: 0.5em;
+}
+
+.footerSection1 h4 {
+    font-size: 1.1em;
+    border: solid 2px #e82618;
+}
+
+.footerSection1 a {
+    font-size: 0.9em;
+    text-transform: uppercase;
+    width: 50%;
+    display: inline-block;
+    padding: 1em;
+    text-align: center;
+    color: #e82618;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.footerSection1 a:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.activeGreen {
+    background-color: #e82618;
+    color: #fff !important;
+}
+
+.footerSection2 {
+    padding: 2em 0;
+}
+
+.footerSection2 h3 {
+    text-transform: uppercase;
+    font-size: 1em;
+    color: #fff;
+    letter-spacing: 1px;
+    padding: 1em 0;
+}
+
+.footerSection2 ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footerSection2 ul li {
+    padding: 0.2em 0;
+}
+
+.footerSection2 ul li a {
+    color: #888;
+    text-decoration: none;
+}
+
+.footerSection2 p {
+    color: #888;
+}
+
+.newsletter {
+    border-bottom: solid 1px #888;
+}
+
+.newsletter input {
+    width: 85%;
+}
+
+.newsletter input,
+.newsletter button {
+    background: none;
+    border: none;
+    padding: 1em;
+    box-sizing: border-box;
+    color: #fff;
+    outline: none;
+}
+
+.newsletter button {
+    width: 10%;
+}
+
+.footerSection3 {
+    border-top: solid 1px #505050;
+    padding: 2em 0;
+}
+
+.footerSection3 ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footerSection3 ul li {
+    display: inline;
+    border-right: solid 1px #888;
+    margin-right: 0.5em;
+}
+
+.footerSection3 ul li a {
+    color: #888;
+    text-decoration: none;
+    padding-right: 0.5em;
+}
+
+.footerSection3 ul li:last-child {
+    border-right: none;
+}
+
+.footerSection3 p {
+    color: #888;
+    text-align: right;
+    margin-bottom: 0;
+}
+
+.footerSection3 p a {
+    color: #43b4ae;
+}
+.tesimonial-right-margin{
+margin-right:30px;
+  }
+/* carousel */
+#quote-carousel 
+{
+  padding: 0 10px 30px 10px;
+  margin-top: 30px;
+}
+
+/* Control buttons  */
+#quote-carousel .carousel-control
+{
+  background: none;
+  color: #222;
+  font-size: 2.3em;
+  text-shadow: none;
+  margin-top: 60px;
+}
+/* Previous button  */
+#quote-carousel .carousel-control.left 
+{
+  left: -12px;
+}
+/* Next button  */
+#quote-carousel .carousel-control.right 
+{
+  right: -12px !important;
+}
+/* Changes the position of the indicators */
+#quote-carousel .carousel-indicators 
+{
+  right: 50%;
+  top: auto;
+  bottom: 0px;
+  margin-right: -19px;
+}
+/* Changes the color of the indicators */
+#quote-carousel .carousel-indicators li 
+{
+  background: #c0c0c0;
+}
+#quote-carousel .carousel-indicators .active 
+{
+  background: #333333;
+}
+#quote-carousel img
+{
+  width: 150px;
+  height: 150px
+}
+/* End carousel */
+
+.item blockquote {
+  border-left: none; 
+  margin: 0;
+}
+
+.item blockquote img {
+  margin-bottom: 10px;
+}
+
+.item blockquote p:before {
+  content: "\f10d";
+  font-family: 'Fontawesome';
+  float: left;
+  margin-right: 10px;
+}
+
+
+
+/**
+MEDIA QUERIES
+*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+#quote-carousel 
+{
+  margin-bottom: 0;
+  padding: 0 40px 30px 40px;
+}
+
+}
+
+/* Small devices (tablets, up to 768px) */
+@media (max-width: 768px) { 
+
+/* Make the indicators larger for easier clicking with fingers/thumb on mobile */
+
+#quote-carousel .carousel-indicators {
+  bottom: -20px !important;  
+}
+#quote-carousel .carousel-indicators li {
+  display: inline-block;
+  margin: 0px 5px;
+  width: 15px;
+  height: 15px;
+}
+#quote-carousel .carousel-indicators li.active {
+  margin: 0px 5px;
+  width: 20px;
+  height: 20px;
+}
+}
+.thumbnail {
+display: block;
+padding: 0px !important;
+margin-bottom: 20px;
+line-height: 1.42857143;
+background-color: transparent !important;
+border: 0px solid rgba(221, 221, 221, 0) !important;
+border-radius: 4px; */
+-webkit-transition: border .2s ease-in-out;
+-o-transition: border .2s ease-in-out;
+transition: border .2s ease-in-out;
+}
+
+
+.steps_color{
+    color: white;
+}
+
+.bannerText1{
+    color: white;
+}
+
+.form1reg{
+    padding: 10px 20px;
+}
+
+
+
+
+
+/* Slider */
+
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+.mySlides {
+    display: none;
+}
+
+/* Next & previous buttons */
+.next1 {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 3px 3px 3px 3px;
+}
+
+/* Position the "next button" to the right */
+.next1 {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+ .next1:hover {
+  text-decoration: none;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 2px 6px;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+
+/* Fading animation */
+.fade1 {
+  -webkit-animation-name: fade1;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade1;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade1 {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade1 {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+
+/* Start progress bar*/
+.progress {
+  overflow: visible;
+  margin-bottom: 26px;
+  height: 6px;
+}
+.progress .progress-bar {
+  background-color: #5c4084;
+  position: relative;
+  border-radius: 4px;
+}
+.progress .progress-bar span {
+    background-color: #5c4084;
+    position: absolute;
+    font-size: 12px;
+    height: 50px;
+    width: 50px;
+    padding: 15px 5px;
+    right: 0em;
+    bottom: 0;
+    margin-bottom: -20px;
+    border-radius: 50%;
+}
+.progress .progress-bar span:after {
+  top: 55%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #5c4084;
+  border-width: 5px;
+  margin-left: -5px;
+    
+}
+
+/* End progress bar*/
+
+
+
+    .from2{
+     min-height: 284px;
+     }
+
+     .paddingforseekingright{
+        padding-right: 0px;
+     }
+     .paddingforseekingleft{
+        padding-left: 0px;
+     }
+     .uploadimage1{
+        text-align: center;
+        height: auto;
+     }
+    .uploadimage2{
+    border: 7px solid;    
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+     }
+
+     .disabledclass:hover{
+        cursor: not-allowed;
+        background: lightgrey;
+     }
+
+
+/* Start Steps Image Upload */
+
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    cursor: pointer;
+}
+
+.imagecontainer {
+    position: relative;
+}
+
+.imageupload1 {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middleimage {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.imagecontainer:hover .middleimage {
+  opacity: 0.3;
+}
+
+.imagecontainer:hover .middleimage {
+  opacity: 1;
+}
+
+.textnew {
+  color: white;
+  font-size: 52px;
+  padding: 16px 32px;
+}
+
+
+/* End Steps Image Upload */
+
+.addresssection{
+    padding: 25px 11% 18px;
+    
+}
+
+.addessbtn1{
+    margin-top: 25px;
+}
+
+
+
+/* Start Slides KeyFrame Animation For */
+
+@-webkit-keyframes slideInBothWays {
+  0% {
+    -webkit-transform: translate3d(100%,0,0);
+  }      
+  25% {
+    -webkit-transform: translate3d(75%,0,0);
+  }   
+  50% {
+    -webkit-transform: translate3d(50%,0,0);
+  } 
+  75%{
+    -webkit-transform: translate3d(25%,0,0);
+  }
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+   }
+}
+ 
+.slide-in-both-ways {
+   -webkit-animation: slideInBothWays ease-in 1;
+  animation: slideInBothWays ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1000ms;
+  animation-duration: 1000ms;
+}
+/* End Slides KeyFrame Animation For */
+
+.newquestion1{
+    min-height: 350px;
+    width: 100%;
+    }
+
+/* fade */
+
+.anim1 {
+    margin-top: 15px;
+    font-size: 21px;
+    text-align: center;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.questioncss1{
+    color: white;
+    margin-top: 0px;
+    margin-bottom: 42px;
+}
+.pull-right2{
+    right: 0;
+}
+.padcls1{
+    padding: 39px !important;
+    padding-bottom: 0px !important;
+}
+
+.answercsslabel{
+       color: white; 
+}
+.capitlize1{
+    text-transform: capitalize;
+}
+.heightlogo{
+    height: 256px;
+}
+.newmarginadd{
+  margin-top: 15px;
+}
+.addessbtn11{
+   margin-top: 45px;
+}
+.regdone1{
+margin-top: 20px !important;
+}
+.addessbtn12{
+margin-bottom: 20px; margin-bottom: 30px;
+}
+.h2title2{
+  margin-bottom: 53px; margin-top: 0px;
+}
+.onlinebtn111{
+  margin-right: 10px;
+}
+
+ .finish-step1{
+      padding-left: 100px;
+      padding-right: 100px;
+      text-align: center;
+      margin-top: 7%;
+}
+.pointer1{
+  cursor: pointer;
+}
+.card-img2{
+  height: 200px !important;
+}
+.img-s{
+  height: 256px;
+  border:unset;
+}
+.img-s2{
+  height: 200px; border:unset;
+}
+.listpadding{
+  padding-bottom: 0px;
+}
+
+.listpadding2{
+  padding:0px;
+}

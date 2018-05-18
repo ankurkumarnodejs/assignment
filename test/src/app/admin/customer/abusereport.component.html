@@ -1,0 +1,51 @@
+<div id="wrapper">
+    <app-header></app-header>
+    <div id="page-wrapper">    
+        <div class="container-fluid">               
+            <div class="row newmargin11" >
+                <div class="col-sm-12 paddingbredcumb">                       
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-fw fa-user"></i> &nbsp; User / Abused Report
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row newrow2"> 
+              <div>
+               <h4 class="headingpadding1"> <i class="fa fa-fw fa-user"></i>  User Abused Report
+                    <a title="Back" class="btn pull-right btn btn-success adminlist1" [routerLink]="['/admin/customer/list']">
+                     <i class="icon ion-arrow-left-c"></i>
+                     </a>
+                     
+                     <input type="text" [(ngModel)]="customerFilter" placeholder="Search" class="pull-right form-control listsearch1">
+
+                    </h4>
+                </div>
+                <div class="table-responsive" *ngIf="this.details.length > 0">
+                                    <table class="table table-bordered table-hover table-striped">
+                                       <thead>
+                                       <tr>
+                                          
+                                           <th>Abuse Reported By</th>
+                                           <th>Abused Reported For</th>
+                                           <th>Description</th>      
+
+                                       </tr>
+                                       </thead>
+                                       <tbody>
+                                            <tr *ngFor="let user of details">
+                                                
+                                                 <td>{{user.FromId.firstname}} {{user.FromId.lastname}} </td>
+
+                                                  <td>{{user.ForId.firstname}} {{user.ForId.lastname}} ({{user.ForId.email}}) </td>
+                                                <td>{{user.description}}</td>
+                                                
+                                                         
+                                            </tr>
+                                       </tbody>
+                                    </table>
+                                </div>
+            </div>
+        </div>
+    </div>

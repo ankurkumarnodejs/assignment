@@ -1,0 +1,124 @@
+
+<div id="wrapper">
+    <app-header></app-header>
+    <div id="page-wrapper">    
+        <div class="container-fluid">               
+            <div class="row newmargin11" >
+                <div class="col-sm-12 paddingbredcumb">                       
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="icon ion-clock"></i> &nbsp; Banner time / Update
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row newrow1 paddingform1">
+                <h4 class="text-center"><i class="icon ion-videocamera"></i> Times</h4>
+                <br>
+                <div> 
+                      <div class="form-group" *ngFor="let item of settiming; let i = index;">
+                            <label for="exampleInputEmail1">Frequency {{i+1}}</label>
+                            <span >
+                            <input  [(ngModel)]="item.time" type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter seconds" required>
+                           <!--  <span class="glyphicon glyphicon-remove-circle" (click)="removemorefield(i)"></span> -->
+                            </span>
+                                                     
+                        </div>
+                <br>
+                <div class="text-center">   
+                <button class="btn btn-sm btn-success" (click)="addmorefield()"><i class="icon ion-plus-round"></i></button>
+                </div>
+                     <form [formGroup]="userAddModel" (ngSubmit)="userAdd()">
+                        <a class="btn btn-default pull-right" style="margin-left:5px;" [routerLink]="['/admin/bannersetting/list']"> Cancel</a>
+                        <button type="submit" class="btn btn-default pull-right" [disabled]="!userAddModel.valid">Submit</button>
+                    </form>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="container-fluid">
+	<div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Banner <small>Statistics Overview</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-users"></i> Banner
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+        	<div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-users"></i> Banner Update</h3>
+
+                </div>
+                <div class="panel-body">
+                    <form [formGroup]="userAddModel" (ngSubmit)="userUpdate()">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Title</label>
+                            <input formControlName="title" type="text" class="form-control" id="exampleInputEmail1" placeholder="Title" required>
+                        </div>
+                        
+                         <div class="form-group">
+                          <label for="sel1">Select Type</label>
+                          <select class="form-control" id="sel1" [(ngModel)]="filterx" formControlName="type">
+                            <option value="image">Image</option>
+                            <option value="video">Video</option>        
+                           </select>
+                         </div> 
+
+                        <div class="form-group" *ngIf="filterx == 'image'">
+                        <div *ngIf="updateimg">
+                        <img src="{{imageUrl}}/{{currentimg}}" style="width: 50px; height: 40px;">
+                        <a href="javascript:void(0)" (click)="upimg('show')">Upload Image</a>
+                        </div>
+                        <div *ngIf="!updateimg">
+                            <label for="exampleInputEmail1">Image Upload</label>
+                             <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" accept="image/*"/>
+                              <a href="javascript:void(0)" (click)="upimg('hide')">Cancel</a>
+                        </div>      
+                        </div>
+
+                        <div class="form-group" *ngIf="filterx == 'video'">
+                        <div *ngIf="updateimg">
+                        <video width="320" height="240" controls>
+                            <source src="{{imageUrl}}/{{currentimg}}" type="video/mp4">
+                        </video>
+                        <a href="javascript:void(0)" (click)="upimg('show')">Upload Video</a>
+                        </div>
+                        <div *ngIf="!updateimg">                            
+                             <label for="exampleInputEmail1">Video Upload</label>
+                             <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" accept="video/*"/>
+                              <a href="javascript:void(0)" (click)="upimg('hide')">Cancel</a>
+                        </div>      
+                        </div>
+
+
+
+
+
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Description</label>
+                            <app-tinymce formControlName="description" ></app-tinymce>
+                        </div>
+                        <button type="submit" class="btn btn-default" [disabled]="!userAddModel.valid">Submit</button>
+                         <a class="btn btn-default" [routerLink]="['/admin/bannersetting/list']"> Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

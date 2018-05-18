@@ -1,0 +1,14 @@
+.capitalize1{
+	text-transform: capitalize;
+}
+.profile-info-name{
+	text-align: left !important;
+}
+.publicimgsize{
+	width: 200px;
+	height: 200px;
+}
+.imagesize1{
+	width: 150px;
+    height: 150px;
+}

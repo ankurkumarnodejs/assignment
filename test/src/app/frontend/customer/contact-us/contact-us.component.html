@@ -1,0 +1,61 @@
+
+<div class="container" style="background: white; margin-top: 60px;">
+<div class="col-sm-offset-2" ></div>
+
+   <h2 class="text-center" style="padding-bottom: 10px; border-bottom: 1px solid lightgrey;"><b> Contact Us </b></h2>
+     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 form-ata"></div>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 form-ata">
+    <h3 class="f-17 bold">How may we help you?</h3>
+    <b class="text-727272">Our agents are available 24x7 to make sure that all your issues and inquiries are resolved.</b>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 custom_need">
+      <h3>  <i class="fa fa-question fa-2x" aria-hidden="true" style="color : #F68B2D"></i> 
+        Need Help? </h3>
+    </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 form-ata"></div>
+     
+  
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-offset-2 col-sm-8 col-xs-12 form-ata">
+        
+            <p><b>Write to us</b></p>
+            <p><b class="text-727272">You may start a <a class="orange"></a> with one of our agents for any queries.</b></p>
+            <b class="text-727272">Or you can fill the below contact form and we make sure to get back to you as soon as possible.</b>
+            <br/>
+            <div class="form-7 col-sm-6 col-lg-6 col-xs-6 col-md-6" style="margin-top: 22px;">
+            <form class="form-horizontal" [formGroup]="contactAddModel" (ngSubmit)="contactSubmit()">
+             <div class="alert alert-success alert-dismissable" *ngIf="success">
+               <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="sfalse()">&times;</a>
+             <strong>We will Contact You Soon !</strong>
+             </div>
+                <div class="form-group">
+                    <label for="name" class="control-label">Name <span class="orange">*</span></label>
+                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="First & Last Name">        
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="control-label">Email <span class="orange">*</span></label>
+
+                    <input type="email" class="form-control" id="email" formControlName="email" placeholder="example@domain.com">
+
+                </div>
+                <div class="form-group">
+                <label for="phone" class="control-label"> Phone <span class="orange">*</span></label>
+                <input type="number" class="form-control" id="phone" name="phone" formControlName="phone" placeholder="Phone No." >     
+                </div>
+                <div class="form-group">
+                    <label for="message" class="control-label">Message <span class="orange">*</span></label>
+                    <textarea class="form-control" rows="4" name="message" formControlName="message"></textarea>
+                </div> 
+                <div class="form-group">
+                <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" site_key="6Ldg1SUUAAAAADvTCAxce8bTGFCK9TSw1ExOT7_I" (captchaExpired)="onCaptchaExpired()"></re-captcha>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button id="submit" type="submit" class="btn btn-success" [disabled]="!contactAddModel.valid">Submit</button>
+                    </div>
+                </div>               
+            </form>
+        </div>
+    </div>
+  
+</div>

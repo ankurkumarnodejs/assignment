@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Admin Registration</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" [formGroup]="adminRegistrationForm"(ngSubmit)="adminRegistration()">
+                        <fieldset>
+                        <div class="form-group">
+                               <label for="firstname">First Name</label>
+                                <input formControlName="firstname" class="form-control" placeholder="First Name" name="firstname" type="text" autofocus required>
+                            </div>
+                            <div class="form-group">
+                            <label for="lastname">Last Name</label>
+                                <input formControlName="lastname" class="form-control" placeholder="Last Name" name="lastname" type="text" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">User Name</label>
+                                <input formControlName="username" class="form-control" placeholder="Username" name="username" type="text" autofocus required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input formControlName="password" class="form-control" placeholder=" Password" name="password" type="password" value="" required>
+                            </div>
+                         <div class="form-group">
+                            <label for="email">Email</label>
+                            <input formControlName="email" type="email"  
+                            class="form-control" id="email" placeholder="email"  required>
+                        </div>
+
+
+                            <!-- Change this to a button or input when using this as a form -->
+                            <button class="btn btn-lg btn-success btn-block" [disabled]="!adminRegistrationForm.valid">Submit</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

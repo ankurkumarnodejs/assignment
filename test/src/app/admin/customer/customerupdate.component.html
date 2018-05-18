@@ -1,0 +1,76 @@
+
+            <div id="wrapper">
+            <app-header></app-header>
+            <div id="page-wrapper">    
+            <div class="container-fluid">               
+            <div class="row newmargin11" >
+            <div class="col-sm-12 paddingbredcumb">                       
+            <ol class="breadcrumb">
+            <li class="active">
+            <i class="fa fa-users"></i> &nbsp; Customer / Update
+            </li>
+            </ol>
+            </div>
+            </div>
+            <div class="row newrow1 paddingform1"> 
+
+            <form [formGroup]="customerUpdateModel"(ngSubmit)="customerUpdate()">
+
+            <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input formControlName="firstname" type="text" class="form-control" id="firstname" placeholder="First Name">
+            </div>
+
+            <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input formControlName="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name">
+            </div>
+
+            <div class="form-group">
+            <label for="username">User Name</label>
+            <input formControlName="username" type="text" class="form-control" id="username" placeholder="User Name" required>
+            </div>   
+
+            <div class="form-group">
+            <label for="password">Password</label>
+            <input formControlName="password" type="text" class="form-control" id="password" placeholder="Password">
+            </div>                     
+
+            <div class="form-group">
+            <label for="email">Email</label>
+            <input formControlName="email" type="text" class="form-control" id="email" placeholder="Email" [readOnly]="true">
+            </div>
+            <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input formControlName="phone" type="text" class="form-control" id="phone" placeholder="Phone Number">
+            </div>
+
+            <div class="form-group">
+            <label for="age">Age</label>
+            <input formControlName="age" type="Number" class="form-control" id="age" placeholder="Age" >
+            </div>
+
+
+            <div class="form-group">
+            <label for="">Gender</label>
+            <ul>
+            <li>
+            <input type="radio" formControlName="gender" value="male"> Male
+            <input type="radio" formControlName="gender"  value="female"> Female                                        
+            </li>                                       
+            </ul> 
+            </div>
+            
+            <div class="form-group">
+            <input type="checkbox" formControlName="featured" value="male"> &nbsp; Featured User
+            </div>
+
+            <button class="btn btn-success" [disabled]="!customerUpdateModel.valid">Update</button>
+            <a class="btn btn-default" [routerLink]="['/admin/customer/list']"> Cancel</a>         
+            </form>
+
+            </div>
+            </div>
+            </div>
+            </div>
+

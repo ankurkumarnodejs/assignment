@@ -1,0 +1,49 @@
+<div id="wrapper">
+    <app-header></app-header>
+    <div id="page-wrapper">    
+        <div class="container-fluid">               
+            <div class="row newmargin11" >
+                <div class="col-sm-12 paddingbredcumb">                       
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-fw fa-user"></i> &nbsp; Admin / List
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row newrow2"> 
+                <div>
+                    <h4 class="headingpadding1"> <i class="fa fa-fw fa-user"></i>  Admins List
+                    <a title="Add New Admin" [routerLink]="['/admin/user/add']" class="pull-right btn btn-success adminlist1">
+                     <i class="icon ion-person-add" ></i>
+                     </a>
+                     <input type="text" [(ngModel)]="userFilter.username" placeholder="Username" class="pull-right form-control listsearch1">
+                    </h4>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th><a (click)="sortBy('fisrtname')" href="javascript:void(0)">Name</a></th>
+                                <th><a (click)="sortBy('username')" href="javascript:void(0)">Username</a></th>
+                                <th><a (click)="sortBy('email')" href="javascript:void(0)">Email</a></th>
+                                <th>Action</th>                                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users|orderBy: order :reverse| filterBy: userFilter">
+                                <td>{{user.ToIdfirstname}} {{user.lastname}}</td>
+                                <td>{{user.username}}</td>
+                                <td>{{user.email}}</td>
+                                <td>
+                                    <a  [routerLink]="['/admin/users',user._id]"><i class="icon ion-edit"></i></a>
+                                    <a  (click)="deleteUser(user._id)" href="javascript:void(0)"><i class="icon ion-ios-trash"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

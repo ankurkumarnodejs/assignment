@@ -1,0 +1,891 @@
+<style type="text/css">
+  #myImg1 {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg1:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal1 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 50px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content1 {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption1 {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 945px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content1, #caption1 {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close1 {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close1:hover,
+.close1:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content1 {
+        width: 100%;
+    }
+}
+</style>
+<!-- <div id="myModal1" class="modal1">
+  <div id="caption1">
+    
+
+  </div>
+</div> -->
+
+
+<header> 
+    <div class="overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 logo">
+                    <img src="assets/images/logo.png" alt="" />
+                </div>
+                <div class="col-md-4" id="hometop">
+                    <div class="bannerText">
+                        <h1>Meet New People  Online</h1>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="loginForm1 pull-right">
+                        <form [formGroup]="loginForm" (ngSubmit)="loginCustomer()">                          
+                            <input type="email" name="email" formControlName="email" placeholder="Username" >
+                            <input type="password" name="password" formControlName="password" placeholder="Enter Password" >
+                            <button class="btn-danger" [disabled]="!loginForm.valid">Login</button>
+                        </form>
+                    </div>
+                    <div class="forgotPassLink pull-ridht">
+                        <a data-toggle="modal" data-target="#myModal">Forgot Password?</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">                            
+                            <div class="registerForm addresssection" *ngIf="regdone == 1">
+                                <div class="bannerText1 col-md-12 text-center">
+                                    <h2 style="margin-bottom: 12px; margin-top: 0px;">Video chat, Meet, Make New Friends</h2>
+                                </div>
+                                <br>
+                                <div class="form1reg">
+                                <form role="form" [formGroup]="userRegistrationForm" (ngSubmit)="userRegistration()">
+                                   
+                                    <div class="formRow">
+                                        <div class="col-sm-12 paddingforseekingleft paddingforseekingright"> 
+                                        <div class="col-sm-6 paddingforseekingleft"> <label for="gender">I Am </label>
+                                        <select formControlName="gender" id="gender" class="form-control select-class1">
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                         </div>
+                                        <div class="col-sm-6 paddingforseekingright">
+                                         <label for="interestedin">Seeking For </label>
+                                        <select formControlName="interestedin" id="interestedin" class="form-control select-class1">
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        </div>
+                                        </div>                                        
+                                    </div>  
+
+                                    <div class="formRow">
+                                      <div class="col-sm-12 paddingforseekingleft paddingforseekingright"> 
+                                        <div class="col-sm-6 paddingforseekingleft"> 
+                                        <label for="username">Username</label>
+                                        <input  type="text"  formControlName="username" id="username" placeholder="Username"  required>
+                                       </div> 
+                                       <div class="col-sm-6 paddingforseekingright">
+                                      <label for="dateofbirth">Date of birth &nbsp; <span *ngIf="userRegistrationForm.get('age').errors" style="font-size: 12px; color: red;">Age should be minimum 18 Years. </span></label>
+
+                                       <input formControlName="dateofbirth" type="text" class="form-control" id="dateofbirth" placeholder="Date of Birth"  #myTimeSets  (blur)="getTimeData(myTimeSets)" />
+                                       </div>
+                                       </div> 
+                                    </div>
+                                    <div class="formRow">
+                                        <label for="email">Email Address</label>
+                                        <input  type="email"  formControlName="email" id="email" placeholder="email"  required>
+                                    </div>
+                                    <div class="formRow">
+                                        <label for="password">Password</label>
+                                        <input type="password" formControlName="password"  placeholder="Password" />
+                                    </div>
+                                    <div class="formRow text-center addessbtn1">                                    
+                                        <button class="btn-danger" [disabled]="!userRegistrationForm.valid">Register</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+
+
+ <div id="myModal1" class="modal1">
+  <div id="caption1">
+    
+                          <!-- second step  -->
+                                                   <div class="registerForm from2 form1reg addresssection newmarginadd" *ngIf="regdone == 2">
+                                <div class="bannerText1 col-md-12 text-center newmarginadd">
+                                    <h2 class="h2title2">Video chat, Meet, Make New Friends</h2>
+                                </div>
+                                <div class="form1reg">
+                                <form role="form" [formGroup]="addAddress" (ngSubmit)="updateAddress()">       
+                                <div class="uploadimage1">
+                                    <div class="image-upload">
+                                    <label for="file-input" class="imagecontainer">
+                                    <img src="{{profilePic}}" class="uploadimage2" /> 
+                                    <div class="middleimage">
+                                    <div class="textnew"><i class="icon ion-camera"></i></div>
+                                    </div>
+                                    </label>
+                                    <input type="file"  id="file-input" class="form-control" ng2FileSelect [uploader]="uploader" (change)="onChangeImg1($event)">
+                                </div>
+                                </div>
+                                <div class="formRow addessbtn1 addessbtn11">                                
+                                <input  type="text"  id="pac-input" placeholder="Your City" style="color:black;">
+                                </div>
+
+                                <br>
+                                <div class="formRow text-center addessbtn1 addessbtn12">
+                                <button type="submit" class="btn-danger" [disabled]="!addAddress.valid">
+                                 Continue </button>
+                                 </div>
+                                 </form>
+                            </div>
+                            </div>
+
+                        
+                          <!--   third Step -->
+
+                          <div class="registerForm from2 regdone3" *ngIf="regdone == 3" style="min-height: 468px;">
+
+<!-- Progress bar -->
+
+<div class="row padcls1">
+    <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': process+'%'}">
+    <span> {{process}} %</span>
+    </div>
+    </div>
+</div>
+
+
+<!-- Start User Section -->
+
+<div class="slideshow-container" *ngIf="slideIndex < 11">
+
+<div class="mySlides anim1">
+  <div class="numbertext pull-right2"> {{slideIndex}} / 16</div> 
+  <div class="newquestion1">
+   <div class="col-md-12">
+   <h2 class="questioncss1"> How tall you are? </h2>
+   
+   <div class="col-md-3 position3" style="padding-right: 0px;">
+   <img src="./assets/images/steps_logo/standing-up-man-.svg" class="heightlogo position4" [ngStyle]="{height : userheight + 'px'} ">
+   </div>
+
+   <div class="col-md-2 position1">
+   <img src="./assets/images/steps_logo/556807.png" class="heightlogo position2" [ngStyle]="{height : '300px'} ">
+   </div>
+<div class="col-md-1"></div>
+    <div class="col-md-5">
+        <div class="row">
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright">
+            <label class="answercsslabel capitlize1"> In Centimeter </label> 
+            <select  class="form-control" [(ngModel)]="dataset.userheight.cm" (change)="onStepChange('height')">
+            <option *ngFor="let centimeter of questions[7].option" [ngValue]="centimeter">{{centimeter}} cm</option>
+            </select>                                       
+            </div>
+        </div>
+    </div>
+
+   <div class="col-md-1"></div>
+
+   </div>
+  </div>
+</div>
+
+
+
+
+<div class="mySlides anim1">
+  <div class="numbertext pull-right2">{{slideIndex}} / 16</div> 
+  <div class="newquestion1">
+   <div class="col-md-12">
+   <h2 class="questioncss1">What is your hair color?</h2>
+   <div class="col-md-6">
+    <img *ngIf="(dataset.haircolor == 'Light Brown')" src="./assets/images/steps_logo/boy-hair-shape1.svg" class="heightlogo">
+    <img  *ngIf="(dataset.haircolor == 'Brunette/Brown')"  src="./assets/images/steps_logo/boy-hair-shape2.svg" class="heightlogo">
+    <img *ngIf="(dataset.haircolor == 'Red')"  src="./assets/images/steps_logo/boy-hair-shape4.svg" class="heightlogo">
+    <img *ngIf="(dataset.haircolor == 'Blonde')"  src="./assets/images/steps_logo/boy-hair-shape5.svg" class="heightlogo">
+    <img *ngIf="(dataset.haircolor == 'White')"  src="./assets/images/steps_logo/boy-hair-shape3.svg" class="heightlogo">
+    <img *ngIf="(dataset.haircolor == 'Black') || (dataset.haircolor == '') || (dataset.haircolor == 'Other')" src="./assets/images/steps_logo/boy-hair-shape6.svg" class="heightlogo">
+    <img *ngIf="(dataset.haircolor == 'Bald/Shaven')"  src="./assets/images/steps_logo/male-with-bald-hair-side-view.svg" class="heightlogo">    
+  </div>
+    <div class="col-md-5">
+        <div class="row">
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright">
+            <label class="answercsslabel capitlize1" > Color </label>
+            <select  class="form-control" [(ngModel)]="dataset.haircolor" (change)="onStepChange('haircolor')"> 
+            <option *ngFor="let color of questions[1].option" value="{{color}}">{{color}}</option>
+            </select>                                       
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+
+<div class="mySlides anim1">
+  <div class="numbertext pull-right2">{{slideIndex}} / 16</div> 
+  <div class="newquestion1">
+   <div class="col-md-12">
+   <h2 class="questioncss1">What your body type?</h2>
+   <div class="col-md-6"> <img src="./assets/images/steps_logo/male-body.svg" class="heightlogo"></div>
+    <div class="col-md-5">
+        <div class="row">
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright">
+            <label class="answercsslabel capitlize1"> Size </label>
+            <select  class="form-control" [(ngModel)]="dataset.bodyshape" (change)="onStepChange('bodyshape')">   
+            <option *ngFor="let size of questions[2].option" value="{{size}}">{{size}}</option>
+            </select>                                       
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+
+<div class="mySlides anim1">
+  <div class="numbertext pull-right2">{{slideIndex}} / 16</div> 
+  <div class="newquestion1">
+   <div class="col-md-12">
+   <h2 class="questioncss1">Choose your Marital Status?</h2>
+   <div class="col-md-6"> <img src="./assets/images/steps_logo/male-body.svg" class="heightlogo"></div>
+    <div class="col-md-5">
+        <div class="row">
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright">
+            <label class="answercsslabel capitlize1"> Status </label>
+            <select  class="form-control" [(ngModel)]="dataset.maritalStatus" (change)="onStepChange('maritalStatus')">  
+            <option value="false">Single</option><option value="true">Married</option>
+            </select>  
+            <br>
+
+            <label class="answercsslabel capitlize1"> Children </label>
+            <select  class="form-control" [(ngModel)]="dataset.haveChildren" (change)="onStepChange('haveChildren')" >            
+            <option value="false">No</option><option value="true">Yes</option>
+            </select>                                      
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+
+<div class="mySlides anim1">
+  <div class="numbertext pull-right2">{{slideIndex}} / 16</div> 
+  <div class="newquestion1">
+   <div class="col-md-12">
+   <h2 class="questioncss1">Do You Smoke?</h2>
+   <div class="col-md-6">
+    <img src="./assets/images/steps_logo/smoking.svg" class="heightlogo">    
+   </div>
+    <div class="col-md-5">
+        <div class="row">
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright">
+            <label class="answercsslabel capitlize1"> Smoker </label>
+            
+            <select  class="form-control" [(ngModel)]="dataset.smoke" (change)="onStepChange('smoke')">  
+            <option value="occasionally">Occasionally</option>
+            <option value="never">Never</option>
+            <option value="rarely">Rarely</option>
+            <option value="regularly">Regularly</option>
+            </select>                             
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+
+<div class="mySlides anim1">
+  <div class="numbertext pull-right2">{{slideIndex}} / 16</div> 
+  <div class="newquestion1">
+   <div class="col-md-12">
+   <h2 class="questioncss1">Do You Drink?</h2>
+   <div class="col-md-6">
+    <img src="./assets/images/steps_logo/drinking.svg" class="heightlogo">    
+   </div>
+    <div class="col-md-5">
+        <div class="row">
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright">
+            <label class="answercsslabel capitlize1"> Drinks </label>
+            <select  class="form-control" [(ngModel)]="dataset.drink" (change)="onStepChange('drink')">   
+            <option value="occasionally">Occasionally</option>
+            <option value="never">Never</option>
+            <option value="rarely">Rarely</option>
+            <option value="regularly">Regularly</option>
+            </select>                             
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+
+<div class="mySlides anim1">
+  <div class="numbertext pull-right2">{{slideIndex}} / 16</div> 
+  <div class="newquestion1">
+   <div class="col-md-12">
+   <h2 class="questioncss1">What is Your Profession?</h2>
+   <div class="col-md-6">
+    <img src="./assets/images/steps_logo/businessman.svg" class="heightlogo">    
+   </div>
+    <div class="col-md-5">
+        <div class="row">
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright">
+            <label class="answercsslabel capitlize1"> Profession </label>
+            <select  class="form-control" [(ngModel)]="dataset.profession" (change)="onStepChange('profession')">
+            <option *ngFor="let s of questions[6].option" value="{{s}}">{{s}}</option>
+            </select>                             
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+<!-- End User Section -->
+
+
+<!-- Start Preferance Section -->
+
+
+<div class="mySlides anim1">
+  <div class="numbertext pull-right2"> {{slideIndex}} / 16</div> 
+  <div class="newquestion1">
+   <div class="col-md-12">
+   <h2 class="questioncss1"> What’s his/her height range? </h2>
+   
+   <div class="col-md-3 position3" style="padding-right: 0px;">
+   <img src="./assets/images/steps_logo/standing-up-man-.svg" class="heightlogo position4" [ngStyle]="{height : userheightpref + 'px'} ">
+   </div>
+
+   <div class="col-md-2 position1">
+   <img src="./assets/images/steps_logo/556807.png" class="heightlogo position2" [ngStyle]="{height : '300px'} ">
+   </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-5">
+        <div class="row">
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright" style="margin-bottom: 10px;">
+            <label class="answercsslabel capitlize1" style="font-size: 18px;">Minimum Height</label>
+            <select  class="form-control" [(ngModel)]="datasetpref.minheight" (change)="onStepChangepref('height')">  
+            <option *ngFor="let centimeter of questions[7].option" [ngValue]="centimeter">{{centimeter}} cm</option>
+            </select>                             
+         </div>
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright">
+            <label class="answercsslabel capitlize1" *ngIf="datasetpref.minheight" style="font-size: 18px;"> Maximum Height </label> 
+            <select  class="form-control" [(ngModel)]="datasetpref.maxheight" (change)="onStepChangepref('height')" *ngIf="datasetpref.minheight">
+            <option *ngFor="let centimeter of questions[7].option" [ngValue]="centimeter">{{centimeter}} cm</option>
+            </select>                             
+         </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+   </div>
+  </div>
+</div>
+
+<div class="mySlides anim1">
+  <div class="numbertext pull-right2">{{slideIndex}} / 16</div> 
+  <div class="newquestion1">
+   <div class="col-md-12">
+   <h2 class="questioncss1">What’s his/her hair color?</h2>
+   <div class="col-md-6">  
+
+    <img *ngIf="(datasetpref.haircolor == 'Light Brown')" src="./assets/images/steps_logo/boy-hair-shape1.svg" class="heightlogo">
+    <img  *ngIf="(datasetpref.haircolor == 'Brunette/Brown')"  src="./assets/images/steps_logo/boy-hair-shape2.svg" class="heightlogo">
+    <img *ngIf="(datasetpref.haircolor == 'Red')"  src="./assets/images/steps_logo/boy-hair-shape4.svg" class="heightlogo">
+    <img *ngIf="(datasetpref.haircolor == 'Blonde')"  src="./assets/images/steps_logo/boy-hair-shape5.svg" class="heightlogo">
+    <img *ngIf="(datasetpref.haircolor == 'White') || (datasetpref.haircolor == 'Other')"  src="./assets/images/steps_logo/boy-hair-shape3.svg" class="heightlogo">
+    <img *ngIf="(datasetpref.haircolor == 'Black') || (datasetpref.haircolor == '') || (datasetpref.haircolor == 'Other')" src="./assets/images/steps_logo/boy-hair-shape6.svg" class="heightlogo">
+    <img *ngIf="(datasetpref.haircolor == 'Bald/Shaven')"  src="./assets/images/steps_logo/male-with-bald-hair-side-view.svg" class="heightlogo"></div>
+
+    <div class="col-md-5">
+        <div class="row">
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright">
+            <label class="answercsslabel capitlize1" > Color </label>
+            <select  class="form-control" [(ngModel)]="datasetpref.haircolor" (change)="onStepChangepref('haircolor')">            
+            <option *ngFor="let color of questions[1].option" value="{{color}}">{{color}}</option>
+            </select>                                       
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+<div class="mySlides anim1">
+  <div class="numbertext pull-right2">{{slideIndex}} / 16</div> 
+  <div class="newquestion1">
+   <div class="col-md-12">
+   <h2 class="questioncss1">What’s his/her body type?</h2>
+   <div class="col-md-6"> <img src="./assets/images/steps_logo/male-body.svg" class="heightlogo"></div>
+    <div class="col-md-5">
+        <div class="row">
+         <div class="col-md-7 col-md-offset-4 paddingforseekingright">
+            <label class="answercsslabel capitlize1"> Size </label>
+            <select  class="form-control" [(ngModel)]="datasetpref.bodyshape" (change)="onStepChangepref('bodyshape')">   
+            <option *ngFor="let size of questions[2].option" value="{{size}}">{{size}}</option>
+            </select>                                       
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+<!-- End Preferance Section -->
+
+<!-- <a class="prev answercsslabel" title="Prev" (click)="plusSlides(-1)" *ngIf="slideIndex > 1">&#10094;</a> -->
+<!-- <a class="next1 answercsslabel btn btn-sm btn-success" title="Continue"  sty> Continue </a> -->
+
+ <button class="btn-danger next1 answercsslabel" (click)="plusSlides(1)" *ngIf="slideIndex < 11"> Continue </button>
+
+</div>
+
+ <h3 class="questioncss1 finish-step1" *ngIf="slideIndex == 11">Your registation has been completed. Please check your email for activate account. </h3> 
+ <div class="formRow text-center addessbtn1" *ngIf="slideIndex == 11">
+    <a class="btn btn-danger" (click)="finish()">
+     Finish </a>
+ </div> 
+</div>
+
+
+
+                        <!-- </div> -->
+                        <!-- </div> -->
+                        </div>
+                        </div>
+                            
+
+
+
+
+
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="content2">
+            <div class="overlay2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-8">
+                            <ul class="pull-right content2ul">
+                                <li>
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>REGISTER NOW</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>COMPLETE YOUR PROFILE</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>ANALYZE MEMBERS</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>START TEXT/VIDEO CHAT</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content3">
+            <!-- Head tags to include FontAwesome -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <!--<h2>Responsive Quote Carousel BS3</h2>-->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                            <!-- Bottom Carousel Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#quote-carousel" data-slide-to="1"></li>
+                                <li data-target="#quote-carousel" data-slide-to="2"></li>
+                            </ol>
+
+                            <!-- Carousel Slides / Quotes -->
+                            <div class="carousel-inner">
+
+                                <!-- Quote 1 -->
+                                <div class="item active">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-3 text-center">
+                                                <img class="img-circle" src="http://www.reactiongifs.com/r/overbite.gif">
+                                                <!--<img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" style="width: 100px;height:100px;">-->
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="tesimonial-right-margin">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but als.</p>
+                                                <small>Someone famous</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                                <!-- Quote 2 -->
+                                <div class="item">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-3 text-center">
+                                                <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" >
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="tesimonial-right-margin">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also</p>
+                                                <small>Someone famous</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                                <!-- Quote 3 -->
+                                <div class="item">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-3 text-center">
+                                                <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/keizgoesboom/128.jpg" >
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="tesimonial-right-margin">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also </p>
+                                                <small>Someone famous</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                            </div>
+
+                            <!-- Carousel Buttons Next/Prev -->
+                            <a data-slide="prev" href="#quote-carousel" class="left carousel-control">
+                            <i class="fa fa-chevron-left"></i></a>
+                            <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+                        </div>                          
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 content4Div colorOne">
+                        <div>
+                            <i class="fa fa-file-text-o"></i>
+                            <p>
+                                <a href="#hometop">Register Now</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 content4Div colorTwo">
+                        <div>
+                            <i class="fa fa-user"></i>
+                            <p>
+                                <a href="#hometop">Create a profile</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 content4Div colorThree">
+                        <div>
+                            <i class="fa fa-heart-o"></i>
+                            <p>
+                                <a href="#hometop">Find true love</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Latest Added Profiles</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                       <ul class="addedProfiles" *ngIf="profiles.length > 0">
+                            <li *ngFor="let profile of profiles">
+                                <a href="javascript:void(0)">
+
+                                    <img *ngIf="profile.profilePic" src="{{url}}{{profile.profilePic}}" alt="" class="img-responsive" style="width: 170px; height: 170px;">
+
+                                    <img *ngIf="!profile.profilePic" src="/assets/images/img_avatar2.png" alt="" class="img-responsive" style="width: 170px; height: 170px;">
+
+                                    <p *ngIf="profile.firstname">{{profile.firstname}} {{profile.lastname}}</p>
+
+                                    <p *ngIf="!profile.firstname">  ----- </p> 
+                                    <span>
+                                    <span *ngIf="profile.age">Age {{profile.age}} , </span>  <span *ngIf="!profile.age">Age - </span>
+                                    <span *ngIf="profile.country">{{profile.country.name}}</span>
+                                    <span *ngIf="!profile.country"> </span>
+                                    </span>
+                                </a>
+                            </li>
+                       </ul>
+
+                        <!-- <ul class="addedProfiles" *ngIf="profiles.length != 6">
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <img src="assets/images/user1.png" alt="" class="img-responsive">
+                                    <p>Monica</p>
+                                    <span>Age 20, London</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <img src="assets/images/user2.png" alt="" class="img-responsive">
+                                    <p>Lisa</p>
+                                    <span>Age 25, New York</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <img src="assets/images/user3.png" alt="" class="img-responsive">
+                                    <p>Mike</p>
+                                    <span>Age 28, Washington</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <img src="assets/images/user4.png" alt="" class="img-responsive">
+                                    <p>Natali</p>
+                                    <span>Age 19, Lynchberg</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <img src="assets/images/user5.png" alt="" class="img-responsive">
+                                    <p>Jessica</p>
+                                    <span>Age 18, London</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <img src="assets/images/user6.png" alt="" class="img-responsive">
+                                    <p>Andrew</p>
+                                    <span>Age 30, Moscow</span>
+                                </a>
+                            </li>
+                        </ul> -->
+
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+
+        <section class="advertise">
+            <div class="overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 advertiseInfo">
+                            <h2>Available Now!</h2>
+                            <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</h3>
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="fa fa-apple"></i>
+                                        <p>Available on the</p>
+                                        <span>AppStore</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="fa fa-play"></i>
+                                        <p>Get it on</p>
+                                        <span>Google Play</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <footer>
+            <div class="container">
+                <div class="row footerSection1">
+                    <div class="col-md-8">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4><a href="javascript:void(0)" class="activeGreen">Take the Tour</a><a href="javascript:void(0)">Get Started</a></h4>
+                    </div>
+                </div>
+                <!-- <app-customer-footer></app-customer-footer> -->
+                  <div class="row footerSection2">
+                <div class="col-md-9">
+                    <div class="col-md-4">
+                        <h3>About Us</h3>
+                        <ul>
+                            <li>
+                                <a href="/customer/page/about-us">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/customer/page/dating-tips">Dating Tips</a>
+                            </li>
+                            <li>
+                                <a href="/customer/page/disclaimer">Disclaimer</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Features</h3>
+                        <ul>
+                            <li>
+                                <a href="/customer/page/take-the-tour">Take the Tour</a>
+                            </li>
+                            <li>
+                                <a href="/customer/page/plans-pricing">Plans &amp; Pricing</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Need Help</h3>
+                        <ul>
+                            <li>
+                                <a [routerLink]="['/customer/contactus']">Contact Us</a>
+                            </li>
+                            <li><a href="/customer/page/faq">FAQs</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h3>Newsletter</h3>
+                    <p>Don't miss to subscribe to our news feeds, kindly fill the form below.</p>
+                    <div class="newsletter">
+                        <form>
+                            <input type="text" placeholder="Enter your email">
+                            <button><i class="glyphicon glyphicon-arrow-right"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row footerSection3">
+                <div class="col-md-6 col-md-offset-1 ">
+                    <p>&copy; 2017, All Rights Reserved</p>
+                    <!-- <p>Designed By <a href="javascript:void(0)">...</a></p> -->
+                </div>
+            </div>
+
+            </div>
+        </footer>
+
+    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Forgot your password?</h4>
+        </div>
+        <div class="modal-body">
+          <p>Enter the email address that you registered with and we’ll send you instructions on how to reset your password.</p>
+      <form role="form" [formGroup]="forgetForm" (ngSubmit)="forgetPass()">
+      <div class="form-group">
+      <input type="email" formControlName="email" class="form-control" placeholder="Enter email" name="email">
+    </div>
+    <div class="form-group">
+      
+      <button class="btn btn-lg btn-success btn-block" [disabled]="!forgetForm.valid">Submit</button>
+    </div>
+    </form>
+    </div>       
+      </div>
+      
+    </div>
+  </div>
+
+
+  

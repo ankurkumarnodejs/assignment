@@ -1,0 +1,76 @@
+<div id="wrapper">
+    <app-header></app-header>
+    <div id="page-wrapper">    
+        <div class="container-fluid">               
+            <div class="row newmargin11" >
+                <div class="col-sm-12 paddingbredcumb">                       
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-fw fa-users"></i> &nbsp; User / List
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row newrow2"> 
+                <div>
+                    <h4 class="headingpadding1"> <i class="fa fa-fw fa-users"></i>  User List
+                    <a title="Add new Customer" class="btn pull-right btn btn-success adminlist1" [routerLink]="['/admin/customer/add']">
+                     <i class="icon ion-person-add"></i>
+                     </a>
+                     
+                     <input type="text" [(ngModel)]="customerFilter.email" placeholder="Username" class="pull-right form-control listsearch1">
+                    </h4>
+                </div>
+                 <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>                                                
+                                                <th><a (click)="sortBy('username')" href="javascript:void(0)">Username</a></th>
+                                                
+                                                <!-- <th><a (click)="sortBy('lastname')" href="javascript:void(0)">Last Name</a></th> -->
+
+                                                <th><a (click)="sortBy('email')" href="javascript:void(0)">email</a></th>
+                                                <th>Package Purchage</th>
+                                                <th>Active</th>
+                                                <th>Action</th>
+                                                <th> Featured </th>
+                                                <th>Blocked User</th>
+                                                <th> Abuse Reports </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let customer of customerslist|orderBy:order : reverse| filterBy: customerFilter">
+                                                
+                                              <!--   <td>{{customer.firstname}}</td>
+                                                <td>{{customer.lastname}}</td> -->
+
+                                                <td>{{customer.username}}</td>
+                                                <td>{{customer.email}}</td>
+                                                <td> 
+                                                 <span *ngIf="customer.mypackage"> Yes   <span *ngIf="customer.mypackage.remaincalls > 0"> ( {{customer.mypackage.remaincalls}} Calls) / ( {{customer.mypackage.noofcalls}} Calls) <br>  {{customer.mypackage.name}}  </span>
+
+                                                  <span *ngIf="customer.mypackage.remaincalls == 0">(0 Calls) </span> </span>
+                                                 <span *ngIf="!customer.mypackage"> No </span>
+                                                 </td>
+                                                <td><span *ngIf="customer.activate == true">Yes</span><span *ngIf="customer.activate == false">No</span></td>       
+                                                <td>
+                                                    <a  [routerLink]="['/admin/customer/edit/',customer._id]"><i class="icon ion-edit"></i></a>
+                                                    <a  (click)="deleteCustomer(customer._id)" href="javascript:void(0)"><i class="icon ion-trash-a"></i></a>
+                                                </td>
+                                                <td>{{customer.featured == true ? 'Yes' : 'No'}} </td>
+                                                <td class="text-center">
+                                                    <a *ngIf="checkblock(customer._id)"  [routerLink]="['/admin/customer/blockeduser/',customer._id]"><i class="icon ion-ios-grid-view"></i> View</a>                                                 
+                                                </td>
+                                                <td class="text-center">
+                                                    <a  *ngIf="checkreport(customer._id)" [routerLink]="['/admin/customer/viewabusereport/',customer._id]"><i class="icon ion-ios-grid-view"></i> View</a>                            
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+            </div>
+        </div>
+    </div>
+
+

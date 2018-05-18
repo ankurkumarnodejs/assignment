@@ -1,0 +1,276 @@
+<div class="container profile-listing-container">
+     <section class="filter-section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="filter-text pull-right"><a style="font-size: 15px;" href="javascript:void(0);" onclick="openFilter();"><img src="../assets/images/icons84.png" width="35px" height="35px"></a></div>
+                     
+                     <label class="btn btnname btn-success newbutton-desine pull-right onlinebtn111" style="padding-bottom: 2px;">
+                     <input type="checkbox" (click)="findOnline()" /> Online &nbsp;&nbsp;
+                     </label>
+
+                    <!-- <button class="btn btn-success btn-sm"><input type="checkbox" name="" [(ngModel)]="filterBy.online" (click)="findOnline()" [checked]="filterBy.online == 'Y'"></button>  -->
+
+                </div>
+                <div class="col-lg-12">
+                    <div id="myfilter" class="filter-box" style="display: none;">
+                        <div class="panel panel-default filter-panel">
+                            <div class="panel-heading">
+                                <a href="javascript:void(0);" class="closebtn" onclick="closeFilter()"><i class="fa  fa-close"></i></a>
+                                <ul id="myTabs" class="nav nav-pills filter-pills" role="tablist" data-tabs="tabs">
+                                    <li class="active"><a href="#home" data-toggle="tab">General</a></li>
+                                    <li><a href="#about" data-toggle="tab">Advance</a></li>
+                                </ul>
+                            </div>
+                             <div class="panel-body" *ngIf="questions">
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Gender:</label>
+                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value="male" [checked]="filterBy.gender.indexOf('male') != -1" (click)="genderFilter('male')">Male</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value="female" [checked]="filterBy.gender.indexOf('female') != -1" (click)="genderFilter('female')">Female</label>
+                                                                </div>                                                               
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Sex Orientation:</label>
+                                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value="straight" [checked]="filterBy.sexualorient.indexOf('straight') != -1" (click)="sexualorientFilter('straight')">Straight</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value="bisexual" [checked]="filterBy.sexualorient.indexOf('bisexual') != -1" (click)="sexualorientFilter('bisexual')">Bisexual</label>
+                                                                </div>                                                       <div class="checkbox">
+                                                                    <label><input type="checkbox" value="lesbian" [checked]="filterBy.sexualorient.indexOf('lesbian') != -1" (click)="sexualorientFilter('lesbian')">Lesbian</label>
+                                                                </div> 
+
+                                                                 <div class="checkbox">
+                                                                    <label><input type="checkbox" value="gay" [checked]="filterBy.sexualorient.indexOf('gay') != -1" (click)="sexualorientFilter('gay')">Gay</label>
+                                                                </div>
+
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value="other" [checked]="filterBy.sexualorient.indexOf('other') != -1" (click)="genderFilter('other')">Other</label>
+                                                                </div>   
+
+                                                            </div>
+                                                        </div>
+                                                </div>
+
+
+                                                     <div class="col-lg-4  col-md-4 col-sm-4 col-xs-12">
+                                                         <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Hair Color:</label>
+
+                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                <div class="checkbox" *ngFor="let color of questions[1].option">
+                                                                    <label><input type="checkbox" value="{{color}}" [checked]="filterBy.haircolor.indexOf(color) != -1" (click)="haircolorFilter(color)">{{color}}</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                   
+                                                        <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="email">Country:</label>
+                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 filter-box-hgt" *ngIf="countrys.length > 0"> 
+                                                               <div class="checkbox" *ngFor="let country of countrys">
+                                                                    <label><input value="{{country}}" type="checkbox"[checked]="filterBy.country.indexOf(country) != -1" (click)="countryFilter(country)">{{country}}</label>     
+                                                                </div>
+                                                            </div>
+                                                        </div>                                                       
+                                                </div>                                       
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="about">
+                                                        <div class="row">
+                                                        <div class="col-lg-4">
+                                                         <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Profession :</label>
+                                                           
+                                                           <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 filter-box-hgt">   
+                                                            <div class="checkbox"><label><input type="checkbox" [checked]="filterBy.any" (click)="anyprofessionFilter()">All</label></div>
+                                                                <div class="checkbox" *ngFor="let pro of questions[6].option" >
+                                                                    <label><input type="checkbox" value="{{pro}}" [checked]="filterBy.profession.indexOf(pro) != -1" (click)="professionFilter(pro)">{{pro}}</label>                     
+                                                                </div>
+
+                                                                
+                                                                
+                                                            </div>
+
+                                                        </div>
+                                                        </div>
+
+
+                                                <div class="col-lg-4">
+                                                    
+                                                       
+                                                        <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Body Shape:</label>
+
+                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                <div class="checkbox" *ngFor="let size of questions[2].option">
+                                                                    <label><input value="{{size}}" type="checkbox"[checked]="filterBy.bodyshape.indexOf(size) != -1" (click)="bodyshapeFilter(size)">{{size}}</label>     
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                </div>
+                                                 <div class="col-lg-4">
+                                                          <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Smoke:</label>
+                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                               
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                <input type="checkbox" value="male" [checked]="filterBy.smoke.indexOf('occasionally') != -1" (click)="smokeFilter('occasionally')">Occasionally</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value="female" [checked]="filterBy.smoke.indexOf('never') != -1" (click)="smokeFilter('never')">Never</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value="female" [checked]="filterBy.smoke.indexOf('rarely') != -1" (click)="smokeFilter('rarely')">Rarely</label>
+                                                                </div>   
+                                                                 <div class="checkbox">
+                                                                    <label><input type="checkbox" value="female" [checked]="filterBy.smoke.indexOf('regularly') != -1" (click)="smokeFilter('regularly')">Regularly</label>
+                                                                </div>                                                         
+                                                            </div>
+                                                        </div>
+                                                        </div>
+
+                                                        <!-- <div class="col-lg-4">
+                                                         <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">qualification</label>
+                                                           
+                                                           <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                <div class="checkbox" *ngFor="let qual of questions[5].option">
+                                                                    <label><input type="checkbox" value="{{qual}}" [checked]="filterBy.qualification.indexOf(qual) != -1" (click)="qualificationFilter(qual)">{{qual}}</label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        </div> -->
+                                                   
+                                                        
+
+                                                            </div>
+
+
+<div class="col-lg-4">
+                                                         <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Marital Status:</label>
+                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                <input type="checkbox" value="male" [checked]="filterBy.maritalstatus.indexOf('false') != -1" (click)="marriedStatusFilter('false')">No</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value="female" [checked]="filterBy.maritalstatus.indexOf('true') != -1" (click)="marriedStatusFilter('true')">Yes</label>
+                                                                </div>                                                               
+                                                            </div>
+                                                        </div>                                                  
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                         <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Drink:</label>
+                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                <input type="checkbox" value="male" [checked]="filterBy.drink.indexOf('occasionally') != -1" (click)="drinkFilter('occasionally')">Occasionally</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value="female" [checked]="filterBy.drink.indexOf('never') != -1" (click)="drinkFilter('never')">Never</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value="female" [checked]="filterBy.drink.indexOf('rarely') != -1" (click)="drinkFilter('rarely')">Rarely</label>
+                                                                </div>   
+                                                                 <div class="checkbox">
+                                                                    <label><input type="checkbox" value="female" [checked]="filterBy.drink.indexOf('regularly') != -1" (click)="drinkFilter('regularly')">Regularly</label>
+                                                                </div>                                                            
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                      
+
+
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Min Height:</label>
+                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                            <select  class="form-control" [value]="dataset1.userheight" (input)="dataset1.userheight = $event.target.value" (change)="onStepChange1()">             
+                                                             <option *ngFor="let centimeter of questions[7].option" [ngValue]="centimeter"> {{centimeter}} cm</option>
+                                                            </select>
+                                                            </div>
+                                                            <div></div>
+                                                            </div>
+                                                        </div>
+                                                            
+                                                            <div class="col-lg-4"  style="margin-bottom: 10px;">
+                                                            <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Max Height:</label>
+                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                            <select  class="form-control" [value]="dataset2.userheight" (input)="dataset2.userheight = $event.target.value" (change)="onStepChange2()">             
+                                                            
+                                                           <option *ngFor="let centimeter of questions[7].option" [ngValue]="centimeter">{{centimeter}} cm</option>
+                                                            </select> 
+                                                            </div>
+                                                            <div></div>
+                                                            </div>
+                                                            </div>
+
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                         <div class="form-group">
+                                                            <label class="control-label col-lg-4  col-md-4 col-sm-4 " for="pwd">Age:</label>
+                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                <input type="number" class="form-control" placeholder="Min age" [value]="this.filterBy.minage" (input)="this.filterBy.minage = $event.target.value">
+                                                                <input type="number" class="form-control" placeholder="Max age" [value]="this.filterBy.maxage" (input)="this.filterBy.maxage = $event.target.value">
+                                                            </div>
+                                                        </div>
+                                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer text-center">
+                                <button type="button" class="btn btn-primary" (click)="searchResult()"> <a style="color:white;"onclick="closeFilter()"> Search </a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="listing">
+
+        <ul id="myTabs" class="nav nav-pills category-pills" role="tablist" data-tabs="tabs" style="border-bottom: 1px solid gainsboro;border-top: 1px solid gainsboro;display: flex;
+    justify-content: center;">
+             
+             <li class="active"><a href="javascript:void(0)" class="category-link"  data-toggle="tab" (click)="localCustomerList()">Local</a></li>
+
+            <li><a href="" class="category-link" data-toggle="tab" (click)="globalCustomerList()">Global</a></li>
+
+            <!-- <li><a href="javascript:void(0)" data-toggle="tab" (click)="globalCustomerList()">Global</a></li> -->  
+
+            <li><a href="javascript:void(0)" class="category-link"  data-toggle="tab" (click)="matchCustomerList()">Match</a></li>
+            
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="all">
+               <app-common-listing [customers]="profiles" (changeSomething)="someEvent()"></app-common-listing>
+            </div>
+        </div>
+        </section>
+    </div>
